@@ -1,4 +1,4 @@
-package com.bank.project;
+package com.bank.project.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
