@@ -16,13 +16,13 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/api/etatBCMBalanceGenerales", produces = MediaType.APPLICATION_JSON_VALUE)
-public class EtatBCMBalanceGeneraleController {
+@RequestMapping(value = "/api/etatBCMFluxSortants", produces = MediaType.APPLICATION_JSON_VALUE)
+public class EtatBCMFluxSortantsController {
     private final EtatBCMBalanceGeneraleService etatBCMBalanceGeneraleService;
 
     private final EtatBCMBalanceGeneraleMapper mapper;
 
-    public EtatBCMBalanceGeneraleController(
+    public EtatBCMFluxSortantsController(
             @Autowired final EtatBCMBalanceGeneraleService etatBCMBalanceGeneraleService, @Autowired EtatBCMBalanceGeneraleMapper etatBCMBalanceGeneraleMapper) {
         this.etatBCMBalanceGeneraleService = etatBCMBalanceGeneraleService;
         this.mapper = etatBCMBalanceGeneraleMapper;

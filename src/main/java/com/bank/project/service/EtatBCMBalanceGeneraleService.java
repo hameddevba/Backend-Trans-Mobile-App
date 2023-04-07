@@ -14,21 +14,12 @@ public class EtatBCMBalanceGeneraleService {
     @Autowired
     private EtatBCMBalanceGeneraleDao etatBCMBalanceGeneraleDao;
 
-
     public List<EtatBCMBalanceGenerale> findAll() {
         return etatBCMBalanceGeneraleDao.findAll(Sort.by("id"));
     }
 
     public EtatBCMBalanceGenerale findById(final Long id) {
         return etatBCMBalanceGeneraleDao.findById(id).get();
-    }
-
-    public Long saveOrUpdate(final EtatBCMBalanceGenerale etatBCMBalanceGenerale) {
-        return etatBCMBalanceGeneraleDao.save(etatBCMBalanceGenerale).getId();
-    }
-
-    public void delete(final Long id) {
-        etatBCMBalanceGeneraleDao.deleteById(id);
     }
 
 }

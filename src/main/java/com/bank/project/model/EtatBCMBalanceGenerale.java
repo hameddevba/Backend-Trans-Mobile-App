@@ -1,11 +1,9 @@
 package com.bank.project.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @Entity
@@ -13,20 +11,10 @@ public class EtatBCMBalanceGenerale {
 
     @Id
     @Column(nullable = false, updatable = false)
-    @SequenceGenerator(
-            name = "primary_sequence",
-            sequenceName = "primary_sequence",
-            allocationSize = 1,
-            initialValue = 10000
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "primary_sequence"
-    )
     private Long id;
 
     @Column
-    private LocalDate dateClotureBalance;
+    private Date dateClotureBalance;
 
     @Column(length = 13)
     private String compte;
@@ -54,11 +42,11 @@ public class EtatBCMBalanceGenerale {
         this.id = id;
     }
 
-    public LocalDate getDateClotureBalance() {
+    public Date getDateClotureBalance() {
         return dateClotureBalance;
     }
 
-    public void setDateClotureBalance(LocalDate dateClotureBalance) {
+    public void setDateClotureBalance(Date dateClotureBalance) {
         this.dateClotureBalance = dateClotureBalance;
     }
 
