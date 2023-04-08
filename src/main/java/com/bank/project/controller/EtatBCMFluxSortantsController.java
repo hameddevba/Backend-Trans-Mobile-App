@@ -1,9 +1,13 @@
 package com.bank.project.controller;
 
 import com.bank.project.dto.EtatBCMBalanceGeneraleDto;
+import com.bank.project.dto.EtatBCMFluxSortantsDto;
 import com.bank.project.mapper.EtatBCMBalanceGeneraleMapper;
+import com.bank.project.mapper.EtatBCMFluxSortantsMapper;
 import com.bank.project.model.EtatBCMBalanceGenerale;
+import com.bank.project.model.EtatBCMFluxSortants;
 import com.bank.project.service.EtatBCMBalanceGeneraleService;
+import com.bank.project.service.EtatBCMFluxSortantsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,27 +22,27 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/etatBCMFluxSortants", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EtatBCMFluxSortantsController {
-    private final EtatBCMBalanceGeneraleService etatBCMBalanceGeneraleService;
+    private final EtatBCMFluxSortantsService etatBCMFluxSortantsService;
 
-    private final EtatBCMBalanceGeneraleMapper mapper;
+    private final EtatBCMFluxSortantsMapper mapper;
 
     public EtatBCMFluxSortantsController(
-            @Autowired final EtatBCMBalanceGeneraleService etatBCMBalanceGeneraleService, @Autowired EtatBCMBalanceGeneraleMapper etatBCMBalanceGeneraleMapper) {
-        this.etatBCMBalanceGeneraleService = etatBCMBalanceGeneraleService;
-        this.mapper = etatBCMBalanceGeneraleMapper;
+            @Autowired final EtatBCMFluxSortantsService etatBCMFluxSortantsService, @Autowired EtatBCMFluxSortantsMapper etatBCMFluxSortantsMapper) {
+        this.etatBCMFluxSortantsService = etatBCMFluxSortantsService;
+        this.mapper = etatBCMFluxSortantsMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<EtatBCMBalanceGeneraleDto>> getAllEtatBCMBalanceGenerales() {
-        List<EtatBCMBalanceGenerale> etatBCMBalanceGenerales = etatBCMBalanceGeneraleService.findAll();
-        return ResponseEntity.ok(mapper.toDto(etatBCMBalanceGenerales));
+    public ResponseEntity<List<EtatBCMFluxSortantsDto>> getAllEtatBCMFluxSortants() {
+        List<EtatBCMFluxSortants> etatBCMFluxSortants = etatBCMFluxSortantsService.findAll();
+        return ResponseEntity.ok(mapper.toDto(etatBCMFluxSortants));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EtatBCMBalanceGeneraleDto> getEtatBCMBalanceGenerale(
+    public ResponseEntity<EtatBCMFluxSortantsDto> getEtatBCMFluxSortant(
             @PathVariable final Long id) {
-        EtatBCMBalanceGenerale etatBCMBalanceGenerale = etatBCMBalanceGeneraleService.findById(id);
-        return ResponseEntity.ok(mapper.toDto(etatBCMBalanceGenerale));
+        EtatBCMFluxSortants etatBCMFluxSortants = etatBCMFluxSortantsService.findById(id);
+        return ResponseEntity.ok(mapper.toDto(etatBCMFluxSortants));
     }
 
 
