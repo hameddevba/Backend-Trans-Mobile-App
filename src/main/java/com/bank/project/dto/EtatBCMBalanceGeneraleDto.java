@@ -9,6 +9,7 @@ import java.util.Date;
 public class EtatBCMBalanceGeneraleDto {
     private Long id;
 
+    @JsonFormat(pattern = "yyyymmdd")
     private Date dateClotureBalance;
 
     private String compte;
