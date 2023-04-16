@@ -2,8 +2,8 @@ package com.bank.project;
 
 import com.bank.project.dao.EtatBCMBalanceGeneraleDao;
 import com.bank.project.dao.EtatBCMFluxSortantsDao;
-import com.bank.project.dao.EtatBCM_OuvertureCreditDocumentaireDao;
-import com.bank.project.model.EtatBCM_OuvertureCreditDocumentaire;
+import com.bank.project.dao.EtatBCM_ReleveDesComptesCorrespondantsDao;
+import com.bank.project.model.EtatBCM_ReleveDesComptesCorrespondants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,7 +26,7 @@ public class ProjectApplication implements CommandLineRunner {
 	EtatBCMFluxSortantsDao etatBCMFluxSortantsDao;
 
 	@Autowired
-	EtatBCM_OuvertureCreditDocumentaireDao etatBCM_OuvertureCreditDocumentaireDao;
+	EtatBCM_ReleveDesComptesCorrespondantsDao etatBCM_ReleveDesComptesCorrespondantsDao;
 	@Override
 	public void run(String... args) throws Exception {
 //		EtatBCMBalanceGenerale etatBCMBalanceGenerale = new EtatBCMBalanceGenerale();
@@ -49,11 +49,11 @@ public class ProjectApplication implements CommandLineRunner {
 //		etatBCMBalanceGenerale2.setSoldeCrediteur(new BigDecimal("222.22"));
 //		etatBCMBalanceGenerale2.setSoldeDebiteur(new BigDecimal("111.22"));
 //		etatBCMBalanceGeneraleDao.save(etatBCMBalanceGenerale2);
-		EtatBCM_OuvertureCreditDocumentaire etatBCM_OuvertureCreditDocumentaire = new EtatBCM_OuvertureCreditDocumentaire();
-		//etatBCM_OuvertureCreditDocumentaire.setModeReglement("compte");
-		etatBCM_OuvertureCreditDocumentaire.setId(1L);
-		etatBCM_OuvertureCreditDocumentaire.setDateOuverture(new Date());
-		etatBCM_OuvertureCreditDocumentaireDao.save(etatBCM_OuvertureCreditDocumentaire);
+	//	EtatBCM_ReleveDesComptesCorrespondants etatBCM_ReleveDesComptesCorrespondants = new EtatBCM_ReleveDesComptesCorrespondants();
+		//etatBCM_ReleveDesComptesCorrespondants.setModeReglement("compte");
+		//etatBCM_ReleveDesComptesCorrespondants.setId(1L);
+		//etatBCM_ReleveDesComptesCorrespondants.setDate_ap_cloture(new Date());
+	//	etatBCM_ReleveDesComptesCorrespondantsDao.save(etatBCM_ReleveDesComptesCorrespondants);
 
 	}
 }
