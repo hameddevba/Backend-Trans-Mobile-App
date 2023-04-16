@@ -4,26 +4,33 @@ import com.bank.project.dto.EtatBCMBalanceGeneraleDto;
 import com.bank.project.mapper.EtatBCMBalanceGeneraleMapper;
 import com.bank.project.model.EtatBCMBalanceGenerale;
 import com.bank.project.service.EtatBCMBalanceGeneraleService;
+import com.bank.project.service.PublishService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/api/etatBCMBalanceGenerales", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EtatBCMBalanceGeneraleController {
     private final EtatBCMBalanceGeneraleService etatBCMBalanceGeneraleService;
+    private final PublishService publishService;
 
     private final EtatBCMBalanceGeneraleMapper mapper;
 
     public EtatBCMBalanceGeneraleController(
-            @Autowired final EtatBCMBalanceGeneraleService etatBCMBalanceGeneraleService, @Autowired EtatBCMBalanceGeneraleMapper etatBCMBalanceGeneraleMapper) {
+            final EtatBCMBalanceGeneraleService etatBCMBalanceGeneraleService, final PublishService publishService,
+            final EtatBCMBalanceGeneraleMapper etatBCMBalanceGeneraleMapper) {
         this.etatBCMBalanceGeneraleService = etatBCMBalanceGeneraleService;
         this.mapper = etatBCMBalanceGeneraleMapper;
+        this.publishService = publishService;
+
     }
 
     @GetMapping
@@ -37,6 +44,13 @@ public class EtatBCMBalanceGeneraleController {
             @PathVariable final Long id) {
         EtatBCMBalanceGenerale etatBCMBalanceGenerale = etatBCMBalanceGeneraleService.findById(id);
         return ResponseEntity.ok(mapper.toDto(etatBCMBalanceGenerale));
+    }
+
+    @PostMapping("/publish")
+    public ResponseEntity<Boolean> publish() {
+        List<EtatBCMBalanceGenerale> etatBCMBalanceGenerales = etatBCMBalanceGeneraleService.findAll();
+        boolean published = publishService.publishEtatGenerale(mapper.toDto(etatBCMBalanceGenerales));
+        return ResponseEntity.ok(published);
     }
 
 

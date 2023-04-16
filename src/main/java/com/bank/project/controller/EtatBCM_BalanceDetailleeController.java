@@ -7,15 +7,13 @@ import com.bank.project.service.EtatBCM_BalanceDetailleeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/api/etatBCM_BalanceDetaillees", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EtatBCM_BalanceDetailleeController {
     private final EtatBCM_BalanceDetailleeService etatBCM_BalanceDetailleeService;
