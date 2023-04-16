@@ -16,7 +16,6 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/api/etatBCMBalanceGenerales", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EtatBCMBalanceGeneraleController {
     private final EtatBCMBalanceGeneraleService etatBCMBalanceGeneraleService;

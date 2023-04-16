@@ -13,7 +13,6 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value = "/api/etatBCM_PrevisionEcheance", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EtatBCM_PrevisionEcheanceController {
     private final EtatBCM_PrevisionEcheanceService etatBCM_PrevisionEcheanceService;

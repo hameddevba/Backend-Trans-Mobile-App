@@ -13,7 +13,6 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value = "/api/etatBCM_Flux_Entrants", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EtatBCM_Flux_EntrantsController {
     private final EtatBCM_Flux_EntrantsService etatBCM_Flux_EntrantsService;

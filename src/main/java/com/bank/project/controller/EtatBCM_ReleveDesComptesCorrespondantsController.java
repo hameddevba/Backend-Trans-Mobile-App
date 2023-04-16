@@ -13,7 +13,6 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value = "/api/etatBCM_ReleveDesComptesCorrespondants", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EtatBCM_ReleveDesComptesCorrespondantsController {
     private final EtatBCM_ReleveDesComptesCorrespondantsService etatBCM_ReleveDesComptesCorrespondantsService;

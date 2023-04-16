@@ -17,7 +17,6 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/api/etatBCMFluxSortants", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EtatBCMFluxSortantsController {
     private final EtatBCMFluxSortantsService etatBCMFluxSortantsService;

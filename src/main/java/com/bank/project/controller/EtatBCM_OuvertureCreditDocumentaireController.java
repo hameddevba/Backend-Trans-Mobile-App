@@ -13,7 +13,6 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/api/etatBCM_OuvertureCreditDocumentaire", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EtatBCM_OuvertureCreditDocumentaireController {
     private final EtatBCM_OuvertureCreditDocumentaireService etatBCM_OuvertureCreditDocumentaireService;
