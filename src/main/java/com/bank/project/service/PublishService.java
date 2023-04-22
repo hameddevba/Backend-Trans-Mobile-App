@@ -3,6 +3,8 @@ package com.bank.project.service;
 import com.bank.project.dto.EtatBCMBalanceGeneraleDto;
 import com.bank.project.dto.EtatBCMFluxSortantsDto;
 import com.bank.project.dto.UserDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +17,7 @@ import java.util.List;
 
 @Service
 public class PublishService {
+    //Logger logger = LoggerFactory.getLogger(PublishService.class);
     @Value("${publish.etat.bcm.balance.generale.api}")
     public String etatBCM_BalanceGeneraleApi;
     @Value("${publish.etat.bcm.flux.sortants.api}")
@@ -35,7 +38,8 @@ public class PublishService {
         ResponseEntity<String> response = restTemplate.exchange(
                 url+loginApi, HttpMethod.POST, request, String.class
         );
-        if(response.getStatusCode().is2xxSuccessful()) return response.getBody();
+        //logger.info("response : {}",response);
+        if(response.getStatusCode().is2xxSuccessful()) return "Bearer " + response.getBody();
         throw new RuntimeException("authentification failed");
     }
 
@@ -43,11 +47,14 @@ public class PublishService {
         RestTemplate restTemplate = new RestTemplate();
         //login
         String token = getToken(restTemplate);
+        //logger.info("token : {}",token);
         HttpHeaders headers = new HttpHeaders();
-        headers.set("authorization",token);
+        headers.set(HttpHeaders.AUTHORIZATION, token);
+        //headers.set("Authorization",token);
         HttpEntity<List<EtatBCMBalanceGeneraleDto>> request = new HttpEntity<>(etatBCMBalanceGenerales, headers);
         // appel de webservice
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCM_BalanceGeneraleApi, HttpMethod.POST, request, String.class);
+       // logger.info("response etatGeneral : {}",response);
         return response.getStatusCode().is2xxSuccessful();
     }
     public boolean publishFluxSortant(List<EtatBCMFluxSortantsDto> etatBCMFluxSortantsDtos){
@@ -55,10 +62,12 @@ public class PublishService {
         //login
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
-        headers.set("authorization",token);
+        headers.set(HttpHeaders.AUTHORIZATION, token);
+        //headers.set("authorization",token);
         HttpEntity<List<EtatBCMFluxSortantsDto>> request = new HttpEntity<>(etatBCMFluxSortantsDtos, headers);
         // appel de webservice
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCM_FluxSortantsApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
     }
+
 }
