@@ -14,6 +14,11 @@ public class EtatBCMFluxSortants {
     @Id
     private Long id;
 
+
+
+    @Column
+    private String banque;
+
     @Column
     private String referenceTransaction;
 
@@ -41,8 +46,12 @@ public class EtatBCMFluxSortants {
     private String beneficiaire;
     @Column
     private String produit;
+
+    private String natureEconomique;
     @Column
     private String pays;
+
+
 
     public Long getId() {
         return id;
@@ -154,5 +163,20 @@ public class EtatBCMFluxSortants {
 
     public void setPays(String pays) {
         this.pays = pays;
+    }
+    public String getBanque() {
+        return banque;
+    }
+
+    public void setBanque(String banque) {
+        this.banque = banque;
+    }
+
+    public String getNatureEconomique() {
+        return natureEconomique;
+    }
+
+    public void setNatureEconomique(String natureEconomique) {
+        this.natureEconomique = natureEconomique;
     }
 }

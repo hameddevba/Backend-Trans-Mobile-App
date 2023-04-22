@@ -1,16 +1,20 @@
 package com.bank.project.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Column;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 
 public class EtatBCMFluxSortantsDto {
-    private Long id;
 
+    @Column
+    private String banque;
 
     private String referenceTransaction;
 
-
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dateTransaction;
 
 
@@ -35,15 +39,11 @@ public class EtatBCMFluxSortantsDto {
 
     private String produit;
 
+
+
+    private String natureEconomique;
     private String pays;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getReferenceTransaction() {
         return referenceTransaction;
@@ -147,5 +147,21 @@ public class EtatBCMFluxSortantsDto {
 
     public void setPays(String pays) {
         this.pays = pays;
+    }
+
+    public String getBanque() {
+        return banque;
+    }
+
+    public void setBanque(String banque) {
+        this.banque = banque;
+    }
+
+    public String getNatureEconomique() {
+        return natureEconomique;
+    }
+
+    public void setNatureEconomique(String natureEconomique) {
+        this.natureEconomique = natureEconomique;
     }
 }

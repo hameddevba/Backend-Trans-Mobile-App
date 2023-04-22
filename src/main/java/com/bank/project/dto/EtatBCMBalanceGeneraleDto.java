@@ -1,15 +1,19 @@
 package com.bank.project.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Column;
 
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class EtatBCMBalanceGeneraleDto {
-    private Long id;
 
-    @JsonFormat(pattern = "yyyymmdd")
+
+
+    @Column
+    private String banque;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dateClotureBalance;
 
     private String compte;
@@ -19,19 +23,12 @@ public class EtatBCMBalanceGeneraleDto {
 
     private String devise;
 
-    private Integer resident;
+    private String resident;
 
     private BigDecimal soldeDebiteur;
 
     private BigDecimal soldeCrediteur;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Date getDateClotureBalance() {
         return dateClotureBalance;
@@ -65,11 +62,11 @@ public class EtatBCMBalanceGeneraleDto {
         this.devise = devise;
     }
 
-    public Integer getResident() {
+    public String getResident() {
         return resident;
     }
 
-    public void setResident(Integer resident) {
+    public void setResident(String resident) {
         this.resident = resident;
     }
 
@@ -87,5 +84,12 @@ public class EtatBCMBalanceGeneraleDto {
 
     public void setSoldeCrediteur(BigDecimal soldeCrediteur) {
         this.soldeCrediteur = soldeCrediteur;
+    }
+    public String getBanque() {
+        return banque;
+    }
+
+    public void setBanque(String banque) {
+        this.banque = banque;
     }
 }

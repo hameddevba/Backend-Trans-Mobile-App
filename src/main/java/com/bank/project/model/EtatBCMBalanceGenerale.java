@@ -14,6 +14,11 @@ public class EtatBCMBalanceGenerale {
     private Long id;
 
     @Column
+    private String banque;
+
+
+
+    @Column
     private Date dateClotureBalance;
 
     @Column(length = 13)
@@ -26,7 +31,7 @@ public class EtatBCMBalanceGenerale {
     private String devise;
 
     @Column
-    private Integer resident;
+    private String resident;
 
     @Column(precision = 10, scale = 2)
     private BigDecimal soldeDebiteur;
@@ -74,11 +79,11 @@ public class EtatBCMBalanceGenerale {
         this.devise = devise;
     }
 
-    public Integer getResident() {
+    public String getResident() {
         return resident;
     }
 
-    public void setResident(Integer resident) {
+    public void setResident(String resident) {
         this.resident = resident;
     }
 
@@ -97,4 +102,13 @@ public class EtatBCMBalanceGenerale {
     public void setSoldeCrediteur(BigDecimal soldeCrediteur) {
         this.soldeCrediteur = soldeCrediteur;
     }
+    public String getBanque() {
+        return banque;
+    }
+
+    public void setBanque(String banque) {
+        this.banque = banque;
+    }
+
+
 }

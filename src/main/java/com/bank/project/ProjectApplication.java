@@ -3,7 +3,7 @@ package com.bank.project;
 import com.bank.project.dao.EtatBCMBalanceGeneraleDao;
 import com.bank.project.dao.EtatBCMFluxSortantsDao;
 import com.bank.project.dao.EtatBCM_ReleveDesComptesCorrespondantsDao;
-import com.bank.project.model.EtatBCM_ReleveDesComptesCorrespondants;
+import com.bank.project.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,10 +29,11 @@ public class ProjectApplication implements CommandLineRunner {
 	EtatBCM_ReleveDesComptesCorrespondantsDao etatBCM_ReleveDesComptesCorrespondantsDao;
 	@Override
 	public void run(String... args) throws Exception {
-//		EtatBCMBalanceGenerale etatBCMBalanceGenerale = new EtatBCMBalanceGenerale();
-//		etatBCMBalanceGenerale.setCompte("compte");
-//		etatBCMBalanceGenerale.setId(1L);
-//		etatBCMBalanceGenerale.setDateClotureBalance(new Date());
+		// new EtatBCMFluxSortants();
+		//EtatBCMBalanceGenerale etatBCMBalanceGenerale = new EtatBCMBalanceGenerale();
+	//	etatBCMBalanceGenerale.setCompte("compte");
+	//	etatBCMBalanceGenerale.setId(1L);
+	//	etatBCMBalanceGenerale.setDateClotureBalance(new Date());
 //		etatBCMBalanceGenerale.setIntituleCompte("intitule compte");
 //		etatBCMBalanceGenerale.setDevise("EUR");
 //		etatBCMBalanceGenerale.setResident(1);
