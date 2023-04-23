@@ -8,14 +8,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-public class EtatBCM_BalanceDetaillee {
+public class EtatBCMBalanceDetaillee {
 
     @Id
     @Column(nullable = false, updatable = false)
     private Long id;
 
     @Column
-    private String Banque;
+    private String banque;
 
     @Column
     private Date dateClotureBalance;
@@ -36,7 +36,7 @@ public class EtatBCM_BalanceDetaillee {
     private String resident;
 
     @Column(length = 1)
-    private String EstClientApparente;
+    private String estClientApparente;
 
     @Column(length = 3)
     private String devise;
@@ -56,11 +56,11 @@ public class EtatBCM_BalanceDetaillee {
     }
 
     public String getBanque() {
-        return Banque;
+        return banque;
     }
 
     public void setBanque(String banque) {
-        Banque = banque;
+        this.banque = banque;
     }
 
     public Date getDateClotureBalance() {
@@ -112,11 +112,11 @@ public class EtatBCM_BalanceDetaillee {
     }
 
     public String getEstClientApparente() {
-        return EstClientApparente;
+        return estClientApparente;
     }
 
     public void setEstClientApparente(String estClientApparente) {
-        EstClientApparente = estClientApparente;
+        this.estClientApparente = estClientApparente;
     }
 
     public String getDevise() {

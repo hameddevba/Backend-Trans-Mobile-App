@@ -1,13 +1,15 @@
-package com.bank.project.dto;
+package com.bank.project.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 
-public class EtatBCM_PrevisionEcheanceDto {
+@Entity
+public class EtatBCMPrevisionEcheance {
 
     @Id
     private Long id;
@@ -74,5 +76,6 @@ public class EtatBCM_PrevisionEcheanceDto {
 
     @Column
     private String devise;
+
 
 }

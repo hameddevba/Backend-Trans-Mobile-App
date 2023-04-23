@@ -1,5 +1,6 @@
 package com.bank.project.dto;
 
+import com.bank.project.model.enums.ResidentEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 
@@ -23,7 +24,7 @@ public class EtatBCMBalanceGeneraleDto {
 
     private String devise;
 
-    private String resident;
+    private ResidentEnum resident;
 
     private BigDecimal soldeDebiteur;
 
@@ -62,11 +63,11 @@ public class EtatBCMBalanceGeneraleDto {
         this.devise = devise;
     }
 
-    public String getResident() {
+    public ResidentEnum getResident() {
         return resident;
     }
 
-    public void setResident(String resident) {
+    public void setResident(ResidentEnum resident) {
         this.resident = resident;
     }
 

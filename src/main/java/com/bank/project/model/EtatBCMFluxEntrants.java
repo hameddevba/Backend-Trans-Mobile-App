@@ -1,13 +1,15 @@
-package com.bank.project.dto;
+package com.bank.project.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 
-public class EtatBCM_Flux_EntrantsDto {
+@Entity
+public class EtatBCMFluxEntrants {
 
     @Id
     private Long id;
@@ -35,7 +37,7 @@ public class EtatBCM_Flux_EntrantsDto {
     @Column
     private String nomDonneurOrdre;
     @Column
-    private String nif_nni;
+    private String nifNni;
 
     public Long getId() {
         return id;
@@ -117,12 +119,12 @@ public class EtatBCM_Flux_EntrantsDto {
         this.nomDonneurOrdre = nomDonneurOrdre;
     }
 
-    public String getNif_nni() {
-        return nif_nni;
+    public String getNifNni() {
+        return nifNni;
     }
 
-    public void setNif_nni(String nif_nni) {
-        this.nif_nni = nif_nni;
+    public void setNifNni(String nifNni) {
+        this.nifNni = nifNni;
     }
 
     public String getBeneficiaire() {
@@ -165,4 +167,5 @@ public class EtatBCM_Flux_EntrantsDto {
     private String natureEconomique;
     @Column
     private String pays;
+
 }

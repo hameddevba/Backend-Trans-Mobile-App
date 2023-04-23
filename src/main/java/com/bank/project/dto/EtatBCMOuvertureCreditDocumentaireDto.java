@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 
-public class EtatBCM_OuvertureCreditDocumentaireDto {
+public class EtatBCMOuvertureCreditDocumentaireDto {
 
     @Id
     private Long id;

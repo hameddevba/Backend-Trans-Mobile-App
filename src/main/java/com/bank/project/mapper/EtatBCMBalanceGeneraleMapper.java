@@ -10,4 +10,7 @@ import java.util.List;
 public interface EtatBCMBalanceGeneraleMapper {
     EtatBCMBalanceGeneraleDto toDto(EtatBCMBalanceGenerale etatBCMBalanceGenerale);
     List<EtatBCMBalanceGeneraleDto> toDto(List<EtatBCMBalanceGenerale> etatBCMBalanceGeneraleList);
+    EtatBCMBalanceGenerale toModel(EtatBCMBalanceGeneraleDto etatBCMBalanceGenerale);
+
+
 }

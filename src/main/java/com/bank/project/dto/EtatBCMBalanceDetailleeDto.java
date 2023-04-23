@@ -4,7 +4,7 @@ package com.bank.project.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class EtatBCM_BalanceDetailleeDto {
+public class EtatBCMBalanceDetailleeDto {
     private Long id;
 
     private Date dateClotureBalance;

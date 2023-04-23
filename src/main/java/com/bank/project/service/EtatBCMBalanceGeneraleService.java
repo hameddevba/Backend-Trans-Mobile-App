@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -17,15 +18,28 @@ public class EtatBCMBalanceGeneraleService {
     @Autowired
     private PublishService publishService;
 
-
-    private String url;
-
     public List<EtatBCMBalanceGenerale> findAll() {
-        return etatBCMBalanceGeneraleDao.findAll(Sort.by("id"));
+        return etatBCMBalanceGeneraleDao.findAll(Sort.by("compte"));
     }
 
-    public EtatBCMBalanceGenerale findById(final Long id) {
-        return etatBCMBalanceGeneraleDao.findById(id).get();
+    public EtatBCMBalanceGenerale findById(final String compte) {
+        return etatBCMBalanceGeneraleDao.findById(compte).orElse(null);
+    }
+
+    public boolean update(final EtatBCMBalanceGenerale etatBCMBalanceGenerale) {
+        Optional<EtatBCMBalanceGenerale> etatBCMBalanceGeneraleSavedOp = etatBCMBalanceGeneraleDao.findById(etatBCMBalanceGenerale.getCompte());
+        if(etatBCMBalanceGeneraleSavedOp.isPresent()){
+            EtatBCMBalanceGenerale etatBCMBalanceGeneraleSaved = etatBCMBalanceGeneraleSavedOp.get();
+            etatBCMBalanceGeneraleSaved.setSoldeCrediteur(etatBCMBalanceGenerale.getSoldeCrediteur());
+            etatBCMBalanceGeneraleSaved.setSoldeDebiteur(etatBCMBalanceGenerale.getSoldeDebiteur());
+            etatBCMBalanceGeneraleSaved.setResident(etatBCMBalanceGenerale.getResident());
+            etatBCMBalanceGeneraleSaved.setDateClotureBalance(etatBCMBalanceGenerale.getDateClotureBalance());
+            etatBCMBalanceGeneraleSaved.setIntituleCompte(etatBCMBalanceGenerale.getIntituleCompte());
+            etatBCMBalanceGeneraleSaved.setBanque(etatBCMBalanceGenerale.getBanque());
+            etatBCMBalanceGeneraleDao.save(etatBCMBalanceGeneraleSaved);
+            return true;
+        }
+        return false;
     }
 
 

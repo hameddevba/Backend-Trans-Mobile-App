@@ -1,17 +1,13 @@
 package com.bank.project.model;
 
+import com.bank.project.model.enums.ResidentEnum;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Date;
 
 
 @Entity
 public class EtatBCMBalanceGenerale {
-
-    @Id
-    @Column(nullable = false, updatable = false)
-    private Long id;
 
     @Column
     private String banque;
@@ -21,7 +17,8 @@ public class EtatBCMBalanceGenerale {
     @Column
     private Date dateClotureBalance;
 
-    @Column(length = 13)
+    @Id
+    @Column(length = 13 ,nullable = false, updatable = false)
     private String compte;
 
     @Column
@@ -31,21 +28,14 @@ public class EtatBCMBalanceGenerale {
     private String devise;
 
     @Column
-    private String resident;
+    @Enumerated(EnumType.ORDINAL)
+    private ResidentEnum resident;
 
     @Column(precision = 10, scale = 2)
     private BigDecimal soldeDebiteur;
 
     @Column(precision = 10, scale = 2)
     private BigDecimal soldeCrediteur;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Date getDateClotureBalance() {
         return dateClotureBalance;
@@ -79,11 +69,11 @@ public class EtatBCMBalanceGenerale {
         this.devise = devise;
     }
 
-    public String getResident() {
+    public ResidentEnum getResident() {
         return resident;
     }
 
-    public void setResident(String resident) {
+    public void setResident(ResidentEnum resident) {
         this.resident = resident;
     }
 
@@ -112,3 +102,4 @@ public class EtatBCMBalanceGenerale {
 
 
 }
+

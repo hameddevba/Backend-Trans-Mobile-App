@@ -9,7 +9,7 @@ import java.util.Date;
 
 
 @Entity
-public class EtatBCM_OuvertureCreditDocumentaire {
+public class EtatBCMOuvertureCreditDocumentaire {
 
     @Id
     private Long id;

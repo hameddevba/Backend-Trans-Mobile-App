@@ -5,12 +5,9 @@ import com.bank.project.mapper.EtatBCMBalanceGeneraleMapper;
 import com.bank.project.model.EtatBCMBalanceGenerale;
 import com.bank.project.service.EtatBCMBalanceGeneraleService;
 import com.bank.project.service.PublishService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -40,7 +37,7 @@ public class EtatBCMBalanceGeneraleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<EtatBCMBalanceGeneraleDto> getEtatBCMBalanceGenerale(
-            @PathVariable final Long id) {
+            @PathVariable final String id) {
         EtatBCMBalanceGenerale etatBCMBalanceGenerale = etatBCMBalanceGeneraleService.findById(id);
         return ResponseEntity.ok(mapper.toDto(etatBCMBalanceGenerale));
     }
@@ -52,5 +49,8 @@ public class EtatBCMBalanceGeneraleController {
         return ResponseEntity.ok(published);
     }
 
-
+    @PutMapping
+    public ResponseEntity<Boolean> update(@RequestBody EtatBCMBalanceGeneraleDto etatBCMBalanceGenerale) {
+        return ResponseEntity.ok(etatBCMBalanceGeneraleService.update(this.mapper.toModel(etatBCMBalanceGenerale)));
+    }
 }
