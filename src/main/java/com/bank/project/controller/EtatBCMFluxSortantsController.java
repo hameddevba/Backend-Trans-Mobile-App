@@ -1,17 +1,16 @@
 package com.bank.project.controller;
 
-import com.bank.project.dto.EtatBCMBalanceGeneraleDto;
 import com.bank.project.dto.EtatBCMFluxSortantsDto;
-import com.bank.project.mapper.EtatBCMBalanceGeneraleMapper;
 import com.bank.project.mapper.EtatBCMFluxSortantsMapper;
-import com.bank.project.model.EtatBCMBalanceGenerale;
 import com.bank.project.model.EtatBCMFluxSortants;
-import com.bank.project.service.EtatBCMBalanceGeneraleService;
 import com.bank.project.service.EtatBCMFluxSortantsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 

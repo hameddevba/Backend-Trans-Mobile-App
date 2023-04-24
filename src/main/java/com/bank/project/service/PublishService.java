@@ -1,8 +1,6 @@
 package com.bank.project.service;
 
-import com.bank.project.dto.EtatBCMBalanceGeneraleDto;
-import com.bank.project.dto.EtatBCMFluxSortantsDto;
-import com.bank.project.dto.UserDto;
+import com.bank.project.dto.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,8 +15,22 @@ import java.util.List;
 public class PublishService {
     @Value("${publish.etat.bcm.balance.generale.api}")
     public String etatBCMBalanceGeneraleApi;
+    @Value("${publish.etat.bcm.balance.detaillee.api}")
+    public String etatBCMBalanceDetailleeApi;
     @Value("${publish.etat.bcm.flux.sortants.api}")
     public String etatBCMFluxSortantsApi;
+
+    @Value("${publish.etat.bcm.ouverture.credit.documentaire.api}")
+    public String etatBCMOuvertureCreditDocumentaireApi;
+
+    @Value("${publish.etat.bcm.prevision.echeance.api}")
+    public String etatBCMPrevisionEcheanceApi;
+
+    @Value("${publish.etat.bcm.flux.entrants.api}")
+    public String etatBCMFluxEntrantsApi;
+
+    @Value("${publish.etat.bcm.releve.comptes.correspondants.api}")
+    public String etatBCMReleveDesComptesCorrespondantsApi;
     @Value("${publish.login.api}")
     public String loginApi;
     @Value("${publish.api.url}")
@@ -39,27 +51,72 @@ public class PublishService {
         throw new RuntimeException("authentification failed");
     }
 
-    public boolean publishEtatGenerale(List<EtatBCMBalanceGeneraleDto> etatBCMBalanceGenerales){
+    public boolean publishEtatGenerale(List<BalanceGeneralePublishDto> etatBCMBalanceGenerales){
         RestTemplate restTemplate = new RestTemplate();
-        //login
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
-        HttpEntity<List<EtatBCMBalanceGeneraleDto>> request = new HttpEntity<>(etatBCMBalanceGenerales, headers);
-        // appel de webservice
+        HttpEntity<List<BalanceGeneralePublishDto>> request = new HttpEntity<>(etatBCMBalanceGenerales, headers);
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCMBalanceGeneraleApi, HttpMethod.POST, request, String.class);
+        return response.getStatusCode().is2xxSuccessful();
+    }
+    public boolean publishEtatBalanceDetaillee(List<EtatBCMBalanceDetailleeDto> etatBCMBalanceDetaillees){
+        RestTemplate restTemplate = new RestTemplate();
+        String token = getToken(restTemplate);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, token);
+        HttpEntity<List<EtatBCMBalanceDetailleeDto>> request = new HttpEntity<>(etatBCMBalanceDetaillees, headers);
+        ResponseEntity<String> response = restTemplate.exchange(url + etatBCMBalanceDetailleeApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
     }
     public boolean publishFluxSortant(List<EtatBCMFluxSortantsDto> etatBCMFluxSortantsDtos){
         RestTemplate restTemplate = new RestTemplate();
-        //login
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
         HttpEntity<List<EtatBCMFluxSortantsDto>> request = new HttpEntity<>(etatBCMFluxSortantsDtos, headers);
-        // appel de webservice
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCMFluxSortantsApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
+    }
+
+    public boolean publishOuvertureCreditDocumentaire(List<EtatBCMOuvertureCreditDocumentaireDto> etatBCMOuvertureCreditDocumentaireDtos){
+        RestTemplate restTemplate = new RestTemplate();
+        String token = getToken(restTemplate);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, token);
+        HttpEntity<List<EtatBCMOuvertureCreditDocumentaireDto>> request = new HttpEntity<>(etatBCMOuvertureCreditDocumentaireDtos, headers);
+        ResponseEntity<String> response = restTemplate.exchange(url + etatBCMOuvertureCreditDocumentaireApi, HttpMethod.POST, request, String.class);
+        return response.getStatusCode().is2xxSuccessful();
+    }
+    public boolean publishEtatBCMPrevisionEcheance(List<EtatBCMPrevisionEcheanceDto> etatBCMPrevisionEcheanceDtos){
+        RestTemplate restTemplate = new RestTemplate();
+        String token = getToken(restTemplate);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, token);
+        HttpEntity<List<EtatBCMPrevisionEcheanceDto>> request = new HttpEntity<>(etatBCMPrevisionEcheanceDtos, headers);
+        ResponseEntity<String> response = restTemplate.exchange(url + etatBCMPrevisionEcheanceApi, HttpMethod.POST, request, String.class);
+        return response.getStatusCode().is2xxSuccessful();
+    }
+
+    public boolean publishEtatBCMFluxEntrants(List<EtatBCMFluxEntrantsDto> etatBCMFluxEntrantsDtos){
+        RestTemplate restTemplate = new RestTemplate();
+        String token = getToken(restTemplate);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, token);
+        HttpEntity<List<EtatBCMFluxEntrantsDto>> request = new HttpEntity<>(etatBCMFluxEntrantsDtos, headers);
+        ResponseEntity<String> response = restTemplate.exchange(url + etatBCMFluxEntrantsApi, HttpMethod.POST, request, String.class);
+        return response.getStatusCode().is2xxSuccessful();
+    }
+
+    public boolean publishEtatBCMReleveDesComptesCorrespondants(List<EtatBCMReleveDesComptesCorrespondantsDto> etatBCMReleveDesComptesCorrespondantsDtos){
+        RestTemplate restTemplate = new RestTemplate();
+        String token = getToken(restTemplate);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, token);
+        HttpEntity<List<EtatBCMReleveDesComptesCorrespondantsDto>> request = new HttpEntity<>(etatBCMReleveDesComptesCorrespondantsDtos, headers);
+        ResponseEntity<String> response = restTemplate.exchange(url + etatBCMReleveDesComptesCorrespondantsApi, HttpMethod.POST, request, String.class);
+        return response.getStatusCode().is2xxSuccessful();
+
     }
 
 }

@@ -1,8 +1,6 @@
 package com.bank.project.mapper;
 
-import com.bank.project.dto.EtatBCMBalanceGeneraleDto;
 import com.bank.project.dto.EtatBCMFluxSortantsDto;
-import com.bank.project.model.EtatBCMBalanceGenerale;
 import com.bank.project.model.EtatBCMFluxSortants;
 import org.mapstruct.Mapper;
 

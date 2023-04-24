@@ -22,12 +22,12 @@ public class EtatBCMBalanceGeneraleService {
         return etatBCMBalanceGeneraleDao.findAll(Sort.by("compte"));
     }
 
-    public EtatBCMBalanceGenerale findById(final String compte) {
-        return etatBCMBalanceGeneraleDao.findById(compte).orElse(null);
+    public EtatBCMBalanceGenerale findById(final Long id) {
+        return etatBCMBalanceGeneraleDao.findById(id).orElse(null);
     }
 
     public boolean update(final EtatBCMBalanceGenerale etatBCMBalanceGenerale) {
-        Optional<EtatBCMBalanceGenerale> etatBCMBalanceGeneraleSavedOp = etatBCMBalanceGeneraleDao.findById(etatBCMBalanceGenerale.getCompte());
+        Optional<EtatBCMBalanceGenerale> etatBCMBalanceGeneraleSavedOp = etatBCMBalanceGeneraleDao.findById(etatBCMBalanceGenerale.getId());
         if(etatBCMBalanceGeneraleSavedOp.isPresent()){
             EtatBCMBalanceGenerale etatBCMBalanceGeneraleSaved = etatBCMBalanceGeneraleSavedOp.get();
             etatBCMBalanceGeneraleSaved.setSoldeCrediteur(etatBCMBalanceGenerale.getSoldeCrediteur());

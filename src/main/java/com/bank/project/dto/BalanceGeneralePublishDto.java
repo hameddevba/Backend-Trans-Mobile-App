@@ -4,13 +4,10 @@ import com.bank.project.model.enums.ResidentEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 
-
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class EtatBCMBalanceGeneraleDto {
-
-
+public class BalanceGeneralePublishDto {
 
     @Column
     private String banque;

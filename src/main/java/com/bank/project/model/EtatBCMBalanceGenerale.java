@@ -2,6 +2,7 @@ package com.bank.project.model;
 
 import com.bank.project.model.enums.ResidentEnum;
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,15 +10,15 @@ import java.util.Date;
 @Entity
 public class EtatBCMBalanceGenerale {
 
+    @Id
+    @GeneratedValue
+    private Long id;
     @Column
     private String banque;
-
-
 
     @Column
     private Date dateClotureBalance;
 
-    @Id
     @Column(length = 13 ,nullable = false, updatable = false)
     private String compte;
 
@@ -36,6 +37,14 @@ public class EtatBCMBalanceGenerale {
 
     @Column(precision = 10, scale = 2)
     private BigDecimal soldeCrediteur;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Date getDateClotureBalance() {
         return dateClotureBalance;
