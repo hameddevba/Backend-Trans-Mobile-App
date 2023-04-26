@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -20,7 +21,22 @@ public class EtatBCMPrevisionEcheanceService {
     }
 
     public EtatBCMPrevisionEcheance findById(final Long id) {
-        return etatBCMPrevisionEcheanceDao.findById(id).get();
+        return etatBCMPrevisionEcheanceDao.findById(id).orElse(null);
+    }
+
+    public boolean update(final EtatBCMPrevisionEcheance etatBCMPrevisionEcheance) {
+        Optional<EtatBCMPrevisionEcheance> etatBCMPrevisionEcheanceOp = etatBCMPrevisionEcheanceDao.findById(etatBCMPrevisionEcheance.getId());
+        if(etatBCMPrevisionEcheanceOp.isPresent()){
+            EtatBCMPrevisionEcheance etatBCMPrevisionEcheanceSaved = etatBCMPrevisionEcheanceOp.get();
+            etatBCMPrevisionEcheanceSaved.setBanque(etatBCMPrevisionEcheance.getBanque());
+            etatBCMPrevisionEcheanceSaved.setNumCredoc(etatBCMPrevisionEcheance.getNumCredoc());
+            etatBCMPrevisionEcheanceSaved.setDevise(etatBCMPrevisionEcheance.getDevise());
+            etatBCMPrevisionEcheanceSaved.setMontantEcheance(etatBCMPrevisionEcheance.getMontantEcheance());
+            etatBCMPrevisionEcheanceSaved.setDateEcheance(etatBCMPrevisionEcheance.getDateEcheance());
+            etatBCMPrevisionEcheanceDao.save(etatBCMPrevisionEcheanceSaved);
+            return true;
+        }
+        return false;
     }
 
 }

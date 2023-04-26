@@ -89,12 +89,12 @@ public class PublishService {
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCMOuvertureCreditDocumentaireApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
     }
-    public boolean publishEtatBCMPrevisionEcheance(List<EtatBCMPrevisionEcheanceDto> etatBCMPrevisionEcheanceDtos){
+    public boolean publishEtatBCMPrevisionEcheance(List<PrevisionEcheancePublishDto> etatBCMPrevisionEcheanceDtos){
         RestTemplate restTemplate = new RestTemplate();
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
-        HttpEntity<List<EtatBCMPrevisionEcheanceDto>> request = new HttpEntity<>(etatBCMPrevisionEcheanceDtos, headers);
+        HttpEntity<List<PrevisionEcheancePublishDto>> request = new HttpEntity<>(etatBCMPrevisionEcheanceDtos, headers);
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCMPrevisionEcheanceApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
     }
@@ -109,12 +109,12 @@ public class PublishService {
         return response.getStatusCode().is2xxSuccessful();
     }
 
-    public boolean publishEtatBCMReleveDesComptesCorrespondants(List<EtatBCMReleveDesComptesCorrespondantsDto> etatBCMReleveDesComptesCorrespondantsDtos){
+    public boolean publishEtatBCMReleveDesComptesCorrespondants(List<ReleveDesComptesCorrespondantsPublishDto> etatBCMReleveDesComptesCorrespondantsDtos){
         RestTemplate restTemplate = new RestTemplate();
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
-        HttpEntity<List<EtatBCMReleveDesComptesCorrespondantsDto>> request = new HttpEntity<>(etatBCMReleveDesComptesCorrespondantsDtos, headers);
+        HttpEntity<List<ReleveDesComptesCorrespondantsPublishDto>> request = new HttpEntity<>(etatBCMReleveDesComptesCorrespondantsDtos, headers);
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCMReleveDesComptesCorrespondantsApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
 

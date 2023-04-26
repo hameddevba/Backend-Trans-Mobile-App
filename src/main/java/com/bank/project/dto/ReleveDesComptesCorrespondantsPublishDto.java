@@ -1,39 +1,25 @@
 package com.bank.project.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 
-public class EtatBCMReleveDesComptesCorrespondantsDto {
+public class ReleveDesComptesCorrespondantsPublishDto {
 
-    @Id
-    private Long id;
 
-    @Column
     private String banque;
 
-    @Column
     private String nomCorrespondant;
-    @Column
     private String numCompte;
-    @Column
     private String devise;
-    @Column
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dateApCloture;
-    @Column
     private BigDecimal soldeDebutJournee;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    private BigDecimal totalMvtsDebiteursJournee;
+    private BigDecimal totalMvtsCrediteurs;
+    private BigDecimal soldeFinJournee;
     public String getBanque() {
         return banque;
     }
@@ -106,11 +92,6 @@ public class EtatBCMReleveDesComptesCorrespondantsDto {
         this.soldeFinJournee = soldeFinJournee;
     }
 
-    @Column
-    private BigDecimal totalMvtsDebiteursJournee;
-    @Column
-    private BigDecimal totalMvtsCrediteurs;
-    @Column
-    private BigDecimal soldeFinJournee;
+
 
 }

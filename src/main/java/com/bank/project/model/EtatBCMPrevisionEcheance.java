@@ -2,6 +2,7 @@ package com.bank.project.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.util.Date;
 public class EtatBCMPrevisionEcheance {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     @Column
@@ -19,6 +21,15 @@ public class EtatBCMPrevisionEcheance {
 
     @Column
     private String numCredoc;
+
+    @Column
+    private Date dateEcheance;
+
+    @Column
+    private BigDecimal montantEcheance;
+
+    @Column
+    private String devise;
 
     public Long getId() {
         return id;
@@ -68,14 +79,7 @@ public class EtatBCMPrevisionEcheance {
         this.devise = devise;
     }
 
-    @Column
-    private Date dateEcheance;
 
-    @Column
-    private BigDecimal montantEcheance;
-
-    @Column
-    private String devise;
 
 
 }

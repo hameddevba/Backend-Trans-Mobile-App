@@ -2,6 +2,7 @@ package com.bank.project.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.util.Date;
 public class EtatBCMReleveDesComptesCorrespondants {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     @Column
@@ -27,6 +29,13 @@ public class EtatBCMReleveDesComptesCorrespondants {
     private Date dateApCloture;
     @Column
     private BigDecimal soldeDebutJournee;
+
+    @Column
+    private BigDecimal totalMvtsDebiteursJournee;
+    @Column
+    private BigDecimal totalMvtsCrediteurs;
+    @Column
+    private BigDecimal soldeFinJournee;
 
     public Long getId() {
         return id;
@@ -108,12 +117,7 @@ public class EtatBCMReleveDesComptesCorrespondants {
         this.soldeFinJournee = soldeFinJournee;
     }
 
-    @Column
-    private BigDecimal totalMvtsDebiteursJournee;
-    @Column
-    private BigDecimal totalMvtsCrediteurs;
-    @Column
-    private BigDecimal soldeFinJournee;
+
 
 
 }
