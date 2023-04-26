@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+
 import java.util.List;
 
 @Service
@@ -60,12 +61,12 @@ public class PublishService {
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCMBalanceGeneraleApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
     }
-    public boolean publishEtatBalanceDetaillee(List<EtatBCMBalanceDetailleeDto> etatBCMBalanceDetaillees){
+    public boolean publishEtatBalanceDetaillee(List<BalanceDetailleePublishDto> etatBCMBalanceDetaillees){
         RestTemplate restTemplate = new RestTemplate();
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
-        HttpEntity<List<EtatBCMBalanceDetailleeDto>> request = new HttpEntity<>(etatBCMBalanceDetaillees, headers);
+        HttpEntity<List<BalanceDetailleePublishDto>> request = new HttpEntity<>(etatBCMBalanceDetaillees, headers);
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCMBalanceDetailleeApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
     }
