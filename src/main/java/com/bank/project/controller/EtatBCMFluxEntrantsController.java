@@ -2,9 +2,10 @@ package com.bank.project.controller;
 
 import com.bank.project.dto.EtatBCMFluxEntrantsDto;
 import com.bank.project.mapper.EtatBCMFluxEntrantsMapper;
+import com.bank.project.mapper.EtatBCMFluxEntrantsPublishMapper;
 import com.bank.project.model.EtatBCMFluxEntrants;
 import com.bank.project.service.EtatBCFluxEntrantsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bank.project.service.PublishService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +19,15 @@ public class EtatBCMFluxEntrantsController {
     private final EtatBCFluxEntrantsService etatBCFluxEntrantsService;
 
     private final EtatBCMFluxEntrantsMapper mapper;
+    private final EtatBCMFluxEntrantsPublishMapper publishMapper;
+    private final PublishService publishService;
 
-    public EtatBCMFluxEntrantsController(
-            @Autowired final EtatBCFluxEntrantsService etatBCFluxEntrantsService, @Autowired EtatBCMFluxEntrantsMapper etatBCMFluxEntrantsMapper) {
+    public EtatBCMFluxEntrantsController(EtatBCFluxEntrantsService etatBCFluxEntrantsService, EtatBCMFluxEntrantsMapper mapper,
+                                         EtatBCMFluxEntrantsPublishMapper publishMapper, PublishService publishService) {
         this.etatBCFluxEntrantsService = etatBCFluxEntrantsService;
-        this.mapper = etatBCMFluxEntrantsMapper;
+        this.mapper = mapper;
+        this.publishMapper = publishMapper;
+        this.publishService = publishService;
     }
 
     @GetMapping
@@ -37,6 +42,16 @@ public class EtatBCMFluxEntrantsController {
         EtatBCMFluxEntrants etatBCMFluxEntrants = etatBCFluxEntrantsService.findById(id);
         return ResponseEntity.ok(mapper.toDto(etatBCMFluxEntrants));
     }
+    @PostMapping("/publish")
+    public ResponseEntity<Boolean> publish() {
+        List<EtatBCMFluxEntrants> etatBCMPrevisionEcheances = etatBCFluxEntrantsService.findAll();
+        boolean published = publishService.publishEtatBCMFluxEntrants(publishMapper.toDto(etatBCMPrevisionEcheances));
+        return ResponseEntity.ok(published);
+    }
 
+    @PutMapping
+    public ResponseEntity<Boolean> update(@RequestBody EtatBCMFluxEntrantsDto etatBCMFluxEntrantsDto) {
+        return ResponseEntity.ok(etatBCFluxEntrantsService.update(this.mapper.toModel(etatBCMFluxEntrantsDto)));
+    }
 
 }

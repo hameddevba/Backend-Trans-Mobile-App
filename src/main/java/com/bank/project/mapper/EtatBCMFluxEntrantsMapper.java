@@ -1,6 +1,7 @@
 package com.bank.project.mapper;
 
 import com.bank.project.dto.EtatBCMFluxEntrantsDto;
+import com.bank.project.dto.EtatBCMFluxEntrantsPublishDto;
 import com.bank.project.model.EtatBCMFluxEntrants;
 import org.mapstruct.Mapper;
 
@@ -10,4 +11,6 @@ import java.util.List;
 public interface EtatBCMFluxEntrantsMapper {
     EtatBCMFluxEntrantsDto toDto(EtatBCMFluxEntrants etatBCMFluxEntrants);
     List<EtatBCMFluxEntrantsDto> toDto(List<EtatBCMFluxEntrants> etatBCMFluxEntrants);
+    EtatBCMFluxEntrants toModel(EtatBCMFluxEntrantsDto etatBCMFluxEntrantsPublishDto);
+
 }

@@ -100,12 +100,12 @@ public class PublishService {
         return response.getStatusCode().is2xxSuccessful();
     }
 
-    public boolean publishEtatBCMFluxEntrants(List<EtatBCMFluxEntrantsDto> etatBCMFluxEntrantsDtos){
+    public boolean publishEtatBCMFluxEntrants(List<EtatBCMFluxEntrantsPublishDto> etatBCMFluxEntrantsDtos){
         RestTemplate restTemplate = new RestTemplate();
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
-        HttpEntity<List<EtatBCMFluxEntrantsDto>> request = new HttpEntity<>(etatBCMFluxEntrantsDtos, headers);
+        HttpEntity<List<EtatBCMFluxEntrantsPublishDto>> request = new HttpEntity<>(etatBCMFluxEntrantsDtos, headers);
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCMFluxEntrantsApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
     }

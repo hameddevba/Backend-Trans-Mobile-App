@@ -1,59 +1,32 @@
-package com.bank.project.model;
+package com.bank.project.dto;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 
-@Entity
-public class EtatBCMFluxEntrants {
-
-    @Id
-    private Long id;
-
-    @Column
+public class EtatBCMFluxEntrantsPublishDto {
     private String banque;
 
-    @Column
     private String referenceTransaction;
 
-    @Column
     private Date dateTransaction;
 
-    @Column
     private String typeSwfit;
 
-    @Column
     private String modeReglement;
-    @Column
     private String devise;
-    @Column
     private BigDecimal montantTransaction;
-    @Column
     private BigDecimal tauxDeChange;
-    @Column
     private String nomDonneurOrdre;
-    @Column
     private String nifNni;
-    @Column
     private String beneficiaire;
-    @Column
     private String produit;
-    @Column
     private String natureEconomique;
-    @Column
     private String pays;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getBanque() {
         return banque;
