@@ -1,6 +1,7 @@
 package com.bank.project.service;
 
 import com.bank.project.dto.*;
+import com.bank.project.mapper.OuvertureCreditDocumentairePublishMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -70,22 +71,22 @@ public class PublishService {
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCMBalanceDetailleeApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
     }
-    public boolean publishFluxSortant(List<EtatBCMFluxSortantsDto> etatBCMFluxSortantsDtos){
+    public boolean publishFluxSortant(List<FluxSortantsPublishDto> fluxSortantsPublishDto){
         RestTemplate restTemplate = new RestTemplate();
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
-        HttpEntity<List<EtatBCMFluxSortantsDto>> request = new HttpEntity<>(etatBCMFluxSortantsDtos, headers);
+        HttpEntity<List<FluxSortantsPublishDto>> request = new HttpEntity<>(fluxSortantsPublishDto, headers);
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCMFluxSortantsApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
     }
 
-    public boolean publishOuvertureCreditDocumentaire(List<EtatBCMOuvertureCreditDocumentaireDto> etatBCMOuvertureCreditDocumentaireDtos){
+    public boolean publishOuvertureCreditDocumentaire(List<OuvertureCreditDocumentairePublishDto> etatBCMOuvertureCreditDocumentaireDtos){
         RestTemplate restTemplate = new RestTemplate();
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
-        HttpEntity<List<EtatBCMOuvertureCreditDocumentaireDto>> request = new HttpEntity<>(etatBCMOuvertureCreditDocumentaireDtos, headers);
+        HttpEntity<List<OuvertureCreditDocumentairePublishDto>> request = new HttpEntity<>(etatBCMOuvertureCreditDocumentaireDtos, headers);
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCMOuvertureCreditDocumentaireApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
     }

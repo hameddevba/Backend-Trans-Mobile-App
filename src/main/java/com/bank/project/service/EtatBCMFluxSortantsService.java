@@ -1,12 +1,14 @@
 package com.bank.project.service;
 
 import com.bank.project.dao.EtatBCMFluxSortantsDao;
+import com.bank.project.model.EtatBCMBalanceDetaillee;
 import com.bank.project.model.EtatBCMFluxSortants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -23,4 +25,31 @@ public class EtatBCMFluxSortantsService {
         return etatBCMFluxSortantsDao.findById(id).get();
     }
 
+    public boolean update(final EtatBCMFluxSortants etatBCMFluxSortants) {
+        Optional<EtatBCMFluxSortants> etatBCMFluxSortantsSavedOp = etatBCMFluxSortantsDao.findById(etatBCMFluxSortants.getId());
+        if(etatBCMFluxSortantsSavedOp.isPresent()){
+            EtatBCMFluxSortants etatBCMFluxSortantsSaved = etatBCMFluxSortantsSavedOp.get();
+            etatBCMFluxSortantsSaved.setBanque(etatBCMFluxSortants.getBanque());
+            etatBCMFluxSortantsSaved.setDevise(etatBCMFluxSortants.getDevise());
+            etatBCMFluxSortantsSaved.setBeneficiaire(etatBCMFluxSortants.getBeneficiaire());
+            etatBCMFluxSortantsSaved.setDateTransaction(etatBCMFluxSortants.getDateTransaction());
+            etatBCMFluxSortantsSaved.setModeReglement(etatBCMFluxSortants.getModeReglement());
+            etatBCMFluxSortantsSaved.setMontantTransaction(etatBCMFluxSortants.getMontantTransaction());
+            etatBCMFluxSortantsSaved.setNifNni(etatBCMFluxSortants.getNifNni());
+            etatBCMFluxSortantsSaved.setNomDonneurOrdre(etatBCMFluxSortants.getNomDonneurOrdre());
+            etatBCMFluxSortantsSaved.setPays(etatBCMFluxSortants.getPays());
+            etatBCMFluxSortantsSaved.setProduit(etatBCMFluxSortants.getProduit());
+            etatBCMFluxSortantsSaved.setReferenceTransaction(etatBCMFluxSortants.getReferenceTransaction());
+            etatBCMFluxSortantsSaved.setSourceDevise(etatBCMFluxSortants.getSourceDevise());
+            etatBCMFluxSortantsSaved.setTauxDeChange(etatBCMFluxSortants.getTauxDeChange());
+            etatBCMFluxSortantsSaved.setTypeSwfit(etatBCMFluxSortants.getTypeSwfit());
+            etatBCMFluxSortantsSaved.setNatureEconomique(etatBCMFluxSortants.getNatureEconomique());
+
+
+
+            etatBCMFluxSortantsDao.save(etatBCMFluxSortantsSaved);
+            return true;
+        }
+        return false;
+    }
 }

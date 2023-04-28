@@ -7,9 +7,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 
-public class EtatBCMFluxSortantsDto {
+public class FluxSortantsPublishDto {
 
-    @Column
+
     private String banque;
 
     private String referenceTransaction;

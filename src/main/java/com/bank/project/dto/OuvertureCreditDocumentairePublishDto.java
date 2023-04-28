@@ -1,5 +1,6 @@
 package com.bank.project.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 
@@ -7,38 +8,27 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 
-public class EtatBCMOuvertureCreditDocumentaireDto {
+public class OuvertureCreditDocumentairePublishDto {
 
-    @Id
-    private Long id;
 
-    @Column
     private String banque;
 
-    @Column
+
     private String numCredoc;
 
-    @Column
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dateOuverture;
 
-    @Column
+
     private String nomDonneurOrdre;
 
-    @Column
+
     private BigDecimal montantOuverture;
 
-    @Column
+
     private String devise;
 
     private String beneficiaire;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getBanque() {
         return banque;
@@ -128,13 +118,13 @@ public class EtatBCMOuvertureCreditDocumentaireDto {
         this.pays = pays;
     }
 
-    @Column
+
     private String nomCorrespondant;
-    @Column
+
     private String produit;
-    @Column
+
     private BigDecimal deposite;
-    @Column
+
     private String pays;
 
 }
