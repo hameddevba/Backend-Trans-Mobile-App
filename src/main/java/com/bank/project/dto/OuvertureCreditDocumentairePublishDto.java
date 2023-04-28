@@ -1,8 +1,6 @@
 package com.bank.project.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 
 import java.math.BigDecimal;
 import java.util.Date;
