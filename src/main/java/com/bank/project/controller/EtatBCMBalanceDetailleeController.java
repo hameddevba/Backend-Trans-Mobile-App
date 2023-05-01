@@ -1,15 +1,11 @@
 package com.bank.project.controller;
 
 import com.bank.project.dto.BalanceDetailleeDto;
-import com.bank.project.dto.BalanceGeneraleDto;
 import com.bank.project.mapper.BalanceDetailleeMapper;
 import com.bank.project.mapper.BalanceDetailleePublishMapper;
-import com.bank.project.mapper.EtatBCMBalanceGeneralePublishMapper;
 import com.bank.project.model.EtatBCMBalanceDetaillee;
-import com.bank.project.model.EtatBCMBalanceGenerale;
 import com.bank.project.service.EtatBCMBalanceDetailleeService;
 import com.bank.project.service.PublishService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

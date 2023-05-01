@@ -1,7 +1,6 @@
 package com.bank.project.service;
 
 import com.bank.project.dao.EtatBCMFluxSortantsDao;
-import com.bank.project.model.EtatBCMBalanceDetaillee;
 import com.bank.project.model.EtatBCMFluxSortants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -22,7 +21,7 @@ public class EtatBCMFluxSortantsService {
     }
 
     public EtatBCMFluxSortants findById(final Long id) {
-        return etatBCMFluxSortantsDao.findById(id).get();
+        return etatBCMFluxSortantsDao.findById(id).orElse(null);
     }
 
     public boolean update(final EtatBCMFluxSortants etatBCMFluxSortants) {

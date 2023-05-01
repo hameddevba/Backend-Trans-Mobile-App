@@ -1,16 +1,10 @@
 package com.bank.project;
 
 import com.bank.project.dao.*;
-import com.bank.project.model.*;
-import com.bank.project.model.enums.ResidentEnum;
-import com.bank.project.model.enums.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.math.BigDecimal;
-import java.util.Date;
 
 
 @SpringBootApplication
@@ -36,7 +30,7 @@ public class ProjectApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        EtatBCMFluxSortants etatBCMFluxSortants = new EtatBCMFluxSortants();
+  /*      EtatBCMFluxSortants etatBCMFluxSortants = new EtatBCMFluxSortants();
         etatBCMFluxSortants.setBanque("banque2");
         etatBCMFluxSortants.setDevise("USD");
         etatBCMFluxSortantsDao.save(etatBCMFluxSortants);
@@ -46,11 +40,11 @@ public class ProjectApplication implements CommandLineRunner {
         etatBCMBalanceGenerale.setDateClotureBalance(new Date());
         etatBCMBalanceGenerale.setCompte("compte");
         etatBCMBalanceGeneraleDao.save(etatBCMBalanceGenerale);
-//        Role role = new Role();
-//        role.setId(1);
-//        role.setName(
-//                RoleEnum.ROLE_ADMIN
-//        );
-//        roleDao.save(role);
+        Role role = new Role();
+        role.setId(1);
+        role.setName(
+                RoleEnum.ROLE_ADMIN
+        );
+        roleDao.save(role);*/
     }
 }

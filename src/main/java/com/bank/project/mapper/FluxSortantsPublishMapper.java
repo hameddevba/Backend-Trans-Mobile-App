@@ -1,6 +1,5 @@
 package com.bank.project.mapper;
 
-import com.bank.project.dto.FluxSortantsDto;
 import com.bank.project.dto.FluxSortantsPublishDto;
 import com.bank.project.model.EtatBCMFluxSortants;
 import org.mapstruct.Mapper;

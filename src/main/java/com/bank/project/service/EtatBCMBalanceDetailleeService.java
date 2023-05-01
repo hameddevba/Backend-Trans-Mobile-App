@@ -2,7 +2,6 @@ package com.bank.project.service;
 
 import com.bank.project.dao.EtatBCMBalanceDetailleeDao;
 import com.bank.project.model.EtatBCMBalanceDetaillee;
-import com.bank.project.model.EtatBCMBalanceGenerale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class EtatBCMBalanceDetailleeService {
     }
 
     public EtatBCMBalanceDetaillee findById(final Long id) {
-        return etatBCMBalanceDetailleeDao.findById(id).get();
+        return etatBCMBalanceDetailleeDao.findById(id).orElse(null);
     }
 
     public boolean update(final EtatBCMBalanceDetaillee etatBCMBalanceDetaillee) {
