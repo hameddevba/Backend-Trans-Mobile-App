@@ -1,6 +1,9 @@
 package com.bank.project.service;
 
+import ch.qos.logback.classic.Logger;
 import com.bank.project.dto.*;
+import com.bank.project.mapper.OuvertureCreditDocumentairePublishMapper;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,10 +16,23 @@ import java.util.List;
 
 @Service
 public class PublishService {
+    Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
     @Value("${publish.etat.bcm.balance.generale.api}")
     public String etatBCMBalanceGeneraleApi;
+
+    @Value("${publish.etat.bcm.balance.generale.mensuel.api}")
+    public String etatBCMBalanceGeneraleMensuelApi;
+
+    @Value("${publish.etat.bcm.balance.generale.annuel.api}")
+    public String etatBCMBalanceGeneraleAnnuelApi;
     @Value("${publish.etat.bcm.balance.detaillee.api}")
     public String etatBCMBalanceDetailleeApi;
+
+    @Value("${publish.etat.bcm.balance.detaillee.mensuel.api}")
+    public String etatBCMBalanceDetailleeMensuelApi;
+
+    @Value("${publish.etat.bcm.balance.detaillee.annuel.api}")
+    public String etatBCMBalanceDetailleeAnnuelApi;
     @Value("${publish.etat.bcm.flux.sortants.api}")
     public String etatBCMFluxSortantsApi;
 
@@ -60,6 +76,26 @@ public class PublishService {
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCMBalanceGeneraleApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
     }
+    public boolean publishEtatGeneraleMensuel(List<BalanceGeneralePublishDto> etatBCMBalanceGenerales){
+       // logger.info("Louly"+etatBCMBalanceGeneraleMensuelApi);
+        RestTemplate restTemplate = new RestTemplate();
+        String token = getToken(restTemplate);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, token);
+        HttpEntity<List<BalanceGeneralePublishDto>> request = new HttpEntity<>(etatBCMBalanceGenerales, headers);
+        ResponseEntity<String> response = restTemplate.exchange(url + etatBCMBalanceGeneraleMensuelApi, HttpMethod.POST, request, String.class);
+        return response.getStatusCode().is2xxSuccessful();
+    }
+    public boolean publishEtatGeneraleAnnuel(List<BalanceGeneralePublishDto> etatBCMBalanceGenerales){
+         //logger.info("Louly"+etatBCMBalanceGeneraleAnnuelApi);
+        RestTemplate restTemplate = new RestTemplate();
+        String token = getToken(restTemplate);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, token);
+        HttpEntity<List<BalanceGeneralePublishDto>> request = new HttpEntity<>(etatBCMBalanceGenerales, headers);
+        ResponseEntity<String> response = restTemplate.exchange(url + etatBCMBalanceGeneraleAnnuelApi, HttpMethod.POST, request, String.class);
+        return response.getStatusCode().is2xxSuccessful();
+    }
     public boolean publishEtatBalanceDetaillee(List<BalanceDetailleePublishDto> etatBCMBalanceDetaillees){
         RestTemplate restTemplate = new RestTemplate();
         String token = getToken(restTemplate);
@@ -67,6 +103,26 @@ public class PublishService {
         headers.set(HttpHeaders.AUTHORIZATION, token);
         HttpEntity<List<BalanceDetailleePublishDto>> request = new HttpEntity<>(etatBCMBalanceDetaillees, headers);
         ResponseEntity<String> response = restTemplate.exchange(url + etatBCMBalanceDetailleeApi, HttpMethod.POST, request, String.class);
+        return response.getStatusCode().is2xxSuccessful();
+    }
+    public boolean publishEtatBalanceDetailleeMensuel(List<BalanceDetailleePublishDto> etatBCMBalanceDetaillees){
+       // logger.info("Louly"+etatBCMBalanceDetailleeMensuelApi);
+       RestTemplate restTemplate = new RestTemplate();
+        String token = getToken(restTemplate);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, token);
+        HttpEntity<List<BalanceDetailleePublishDto>> request = new HttpEntity<>(etatBCMBalanceDetaillees, headers);
+        ResponseEntity<String> response = restTemplate.exchange(url + etatBCMBalanceDetailleeMensuelApi, HttpMethod.POST, request, String.class);
+        return response.getStatusCode().is2xxSuccessful();
+    }
+    public boolean publishEtatBalanceDetailleeAnnuel(List<BalanceDetailleePublishDto> etatBCMBalanceDetaillees){
+        //logger.info("Louly"+etatBCMBalanceDetailleeAnnuelApi);
+        RestTemplate restTemplate = new RestTemplate();
+        String token = getToken(restTemplate);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, token);
+        HttpEntity<List<BalanceDetailleePublishDto>> request = new HttpEntity<>(etatBCMBalanceDetaillees, headers);
+        ResponseEntity<String> response = restTemplate.exchange(url + etatBCMBalanceDetailleeAnnuelApi, HttpMethod.POST, request, String.class);
         return response.getStatusCode().is2xxSuccessful();
     }
     public boolean publishFluxSortant(List<FluxSortantsPublishDto> fluxSortantsPublishDto){
