@@ -8,7 +8,6 @@ import com.bank.project.service.EtatBCMBalanceDetailleeService;
 import com.bank.project.service.PublishService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/etatBCMBalanceDetaillees", produces = MediaType.APPLICATION_JSON_VALUE)
-@PreAuthorize("hasRole('ADMIN')")
 public class EtatBCMBalanceDetailleeController {
     private final EtatBCMBalanceDetailleeService etatBCMBalanceDetailleeService;
 
@@ -36,7 +34,7 @@ public class EtatBCMBalanceDetailleeController {
 
     @GetMapping
     public ResponseEntity<List<BalanceDetailleeDto>> getAllEtatBCMBalanceDetaillees() {
-        List<EtatBCMBalanceDetaillee> etatBCMBalanceDetaillees = etatBCMBalanceDetailleeService.findAll();
+        List<EtatBCMBalanceDetaillee> etatBCMBalanceDetaillees = etatBCMBalanceDetailleeService.findEchantillon();
         return ResponseEntity.ok(mapper.toDto(etatBCMBalanceDetaillees));
     }
 

@@ -18,6 +18,9 @@ public class EtatBCMBalanceDetailleeService {
     public List<EtatBCMBalanceDetaillee> findAll() {
         return etatBCMBalanceDetailleeDao.findAll(Sort.by("id"));
     }
+    public List<EtatBCMBalanceDetaillee> findEchantillon() {
+        return etatBCMBalanceDetailleeDao.findEchantillon();
+    }
 
     public EtatBCMBalanceDetaillee findById(final Long id) {
         return etatBCMBalanceDetailleeDao.findById(id).orElse(null);
