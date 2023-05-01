@@ -54,6 +54,20 @@ public class EtatBCMBalanceDetailleeController {
         return ResponseEntity.ok(published);
     }
 
+    @PostMapping("/publishmensuel")
+    public ResponseEntity<Boolean> publishmensuel() {
+        List<EtatBCMBalanceDetaillee> etatBCMBalanceDetaillees = etatBCMBalanceDetailleeService.findAll();
+        boolean published = publishService.publishEtatBalanceDetailleeMensuel(publishMapper.toDto(etatBCMBalanceDetaillees));
+        return ResponseEntity.ok(published);
+    }
+
+    @PostMapping("/publishannuel")
+    public ResponseEntity<Boolean> publishannuel() {
+        List<EtatBCMBalanceDetaillee> etatBCMBalanceDetaillees = etatBCMBalanceDetailleeService.findAll();
+        boolean published = publishService.publishEtatBalanceDetailleeAnnuel(publishMapper.toDto(etatBCMBalanceDetaillees));
+        return ResponseEntity.ok(published);
+    }
+
     @PutMapping
     public ResponseEntity<Boolean> update(@RequestBody BalanceDetailleeDto etatBCMBalanceDetaillee) {
         return ResponseEntity.ok(etatBCMBalanceDetailleeService.update(this.mapper.toModel(etatBCMBalanceDetaillee)));

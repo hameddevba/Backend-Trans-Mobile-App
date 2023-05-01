@@ -1,5 +1,7 @@
 package com.bank.project.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -8,7 +10,7 @@ public class EtatBCMFluxEntrantsPublishDto {
     private String banque;
 
     private String referenceTransaction;
-
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dateTransaction;
 
     private String typeSwfit;
