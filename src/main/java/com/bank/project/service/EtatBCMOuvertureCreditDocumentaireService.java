@@ -1,7 +1,6 @@
 package com.bank.project.service;
 
 import com.bank.project.dao.EtatBCMOuvertureCreditDocumentaireDao;
-import com.bank.project.model.EtatBCMFluxSortants;
 import com.bank.project.model.EtatBCMOuvertureCreditDocumentaire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -22,7 +21,7 @@ public class EtatBCMOuvertureCreditDocumentaireService {
     }
 
     public EtatBCMOuvertureCreditDocumentaire findById(final Long id) {
-        return etatBCMOuvertureCreditDocumentaireDao.findById(id).get();
+        return etatBCMOuvertureCreditDocumentaireDao.findById(id).orElse(null);
     }
 
     public boolean update(final EtatBCMOuvertureCreditDocumentaire etatBCMOuvertureCreditDocumentaire) {

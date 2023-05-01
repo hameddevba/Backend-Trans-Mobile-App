@@ -1,15 +1,11 @@
 package com.bank.project.controller;
 
-import com.bank.project.dto.BalanceDetailleeDto;
 import com.bank.project.dto.FluxSortantsDto;
-import com.bank.project.dto.FluxSortantsPublishDto;
 import com.bank.project.mapper.FluxSortantsMapper;
 import com.bank.project.mapper.FluxSortantsPublishMapper;
-import com.bank.project.model.EtatBCMBalanceDetaillee;
 import com.bank.project.model.EtatBCMFluxSortants;
 import com.bank.project.service.EtatBCMFluxSortantsService;
 import com.bank.project.service.PublishService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

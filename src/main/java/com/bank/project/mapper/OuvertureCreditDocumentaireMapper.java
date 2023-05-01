@@ -1,8 +1,6 @@
 package com.bank.project.mapper;
 
-import com.bank.project.dto.FluxSortantsDto;
 import com.bank.project.dto.OuvertureCreditDocumentaireDto;
-import com.bank.project.model.EtatBCMFluxSortants;
 import com.bank.project.model.EtatBCMOuvertureCreditDocumentaire;
 import org.mapstruct.Mapper;
 

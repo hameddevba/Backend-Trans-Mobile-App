@@ -1,7 +1,6 @@
 package com.bank.project.mapper;
 
 import com.bank.project.dto.EtatBCMFluxEntrantsDto;
-import com.bank.project.dto.EtatBCMFluxEntrantsPublishDto;
 import com.bank.project.model.EtatBCMFluxEntrants;
 import org.mapstruct.Mapper;
 

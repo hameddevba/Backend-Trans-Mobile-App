@@ -1,15 +1,11 @@
 package com.bank.project.controller;
 
-import com.bank.project.dto.FluxSortantsDto;
 import com.bank.project.dto.OuvertureCreditDocumentaireDto;
 import com.bank.project.mapper.OuvertureCreditDocumentaireMapper;
 import com.bank.project.mapper.OuvertureCreditDocumentairePublishMapper;
-import com.bank.project.model.EtatBCMFluxSortants;
 import com.bank.project.model.EtatBCMOuvertureCreditDocumentaire;
-import com.bank.project.service.EtatBCMFluxSortantsService;
 import com.bank.project.service.EtatBCMOuvertureCreditDocumentaireService;
 import com.bank.project.service.PublishService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
