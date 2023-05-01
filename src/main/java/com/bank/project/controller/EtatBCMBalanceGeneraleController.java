@@ -50,6 +50,18 @@ public class EtatBCMBalanceGeneraleController {
         boolean published = publishService.publishEtatGenerale(publishMapper.toDto(etatBCMBalanceGenerales));
         return ResponseEntity.ok(published);
     }
+    @PostMapping("/publishmensuel")
+    public ResponseEntity<Boolean> publishmensuel() {
+        List<EtatBCMBalanceGenerale> etatBCMBalanceGenerales = etatBCMBalanceGeneraleService.findAll();
+        boolean published = publishService.publishEtatGeneraleMensuel(publishMapper.toDto(etatBCMBalanceGenerales));
+        return ResponseEntity.ok(published);
+    }
+    @PostMapping("/publishannuel")
+    public ResponseEntity<Boolean> publishannuel() {
+        List<EtatBCMBalanceGenerale> etatBCMBalanceGenerales = etatBCMBalanceGeneraleService.findAll();
+        boolean published = publishService.publishEtatGeneraleAnnuel(publishMapper.toDto(etatBCMBalanceGenerales));
+        return ResponseEntity.ok(published);
+    }
 
     @PutMapping
     public ResponseEntity<Boolean> update(@RequestBody BalanceGeneraleDto etatBCMBalanceGenerale) {
