@@ -2,8 +2,8 @@ package com.bank.project.service;
 
 import ch.qos.logback.classic.Logger;
 import com.bank.project.dto.*;
-import com.bank.project.mapper.OuvertureCreditDocumentairePublishMapper;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -55,11 +55,11 @@ public class PublishService {
     String banque;
     @Value("${publish.api.password}")
     String password;
+    @Autowired
+    RestTemplate restTemplate;
 
     public String getToken(RestTemplate restTemplate) {
-        HttpEntity<UserDto> request =
-                new HttpEntity<>(
-                        new UserDto(banque,password));
+        HttpEntity<UserDto> request = new HttpEntity<>(new UserDto(banque,password));
         ResponseEntity<String> response = restTemplate.exchange(
                 url+loginApi, HttpMethod.POST, request, String.class
         );
@@ -68,7 +68,6 @@ public class PublishService {
     }
 
     public boolean publishEtatGenerale(List<BalanceGeneralePublishDto> etatBCMBalanceGenerales){
-        RestTemplate restTemplate = new RestTemplate();
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
@@ -77,8 +76,6 @@ public class PublishService {
         return response.getStatusCode().is2xxSuccessful();
     }
     public boolean publishEtatGeneraleMensuel(List<BalanceGeneralePublishDto> etatBCMBalanceGenerales){
-       // logger.info("Louly"+etatBCMBalanceGeneraleMensuelApi);
-        RestTemplate restTemplate = new RestTemplate();
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
@@ -87,8 +84,6 @@ public class PublishService {
         return response.getStatusCode().is2xxSuccessful();
     }
     public boolean publishEtatGeneraleAnnuel(List<BalanceGeneralePublishDto> etatBCMBalanceGenerales){
-         //logger.info("Louly"+etatBCMBalanceGeneraleAnnuelApi);
-        RestTemplate restTemplate = new RestTemplate();
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
@@ -97,7 +92,7 @@ public class PublishService {
         return response.getStatusCode().is2xxSuccessful();
     }
     public boolean publishEtatBalanceDetaillee(List<BalanceDetailleePublishDto> etatBCMBalanceDetaillees){
-        RestTemplate restTemplate = new RestTemplate();
+
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
@@ -106,8 +101,6 @@ public class PublishService {
         return response.getStatusCode().is2xxSuccessful();
     }
     public boolean publishEtatBalanceDetailleeMensuel(List<BalanceDetailleePublishDto> etatBCMBalanceDetaillees){
-       // logger.info("Louly"+etatBCMBalanceDetailleeMensuelApi);
-       RestTemplate restTemplate = new RestTemplate();
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
@@ -116,8 +109,6 @@ public class PublishService {
         return response.getStatusCode().is2xxSuccessful();
     }
     public boolean publishEtatBalanceDetailleeAnnuel(List<BalanceDetailleePublishDto> etatBCMBalanceDetaillees){
-        //logger.info("Louly"+etatBCMBalanceDetailleeAnnuelApi);
-        RestTemplate restTemplate = new RestTemplate();
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
@@ -126,7 +117,7 @@ public class PublishService {
         return response.getStatusCode().is2xxSuccessful();
     }
     public boolean publishFluxSortant(List<FluxSortantsPublishDto> fluxSortantsPublishDto){
-        RestTemplate restTemplate = new RestTemplate();
+
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
@@ -136,7 +127,7 @@ public class PublishService {
     }
 
     public boolean publishOuvertureCreditDocumentaire(List<OuvertureCreditDocumentairePublishDto> etatBCMOuvertureCreditDocumentaireDtos){
-        RestTemplate restTemplate = new RestTemplate();
+
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
@@ -145,7 +136,7 @@ public class PublishService {
         return response.getStatusCode().is2xxSuccessful();
     }
     public boolean publishEtatBCMPrevisionEcheance(List<PrevisionEcheancePublishDto> etatBCMPrevisionEcheanceDtos){
-        RestTemplate restTemplate = new RestTemplate();
+
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
@@ -155,7 +146,7 @@ public class PublishService {
     }
 
     public boolean publishEtatBCMFluxEntrants(List<EtatBCMFluxEntrantsPublishDto> etatBCMFluxEntrantsDtos){
-        RestTemplate restTemplate = new RestTemplate();
+
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
@@ -165,7 +156,6 @@ public class PublishService {
     }
 
     public boolean publishEtatBCMReleveDesComptesCorrespondants(List<ReleveDesComptesCorrespondantsPublishDto> etatBCMReleveDesComptesCorrespondantsDtos){
-        RestTemplate restTemplate = new RestTemplate();
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
