@@ -3,6 +3,8 @@ package com.bank.project.service;
 import com.bank.project.dao.EtatBCMBalanceGeneraleDao;
 import com.bank.project.model.EtatBCMBalanceGenerale;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,9 @@ public class EtatBCMBalanceGeneraleService {
         return etatBCMBalanceGeneraleDao.findAll(Sort.by("compte"));
     }
 
+    public Page<EtatBCMBalanceGenerale> findEchantillon(int page, int size) {
+        return etatBCMBalanceGeneraleDao.findAll(PageRequest.of(page, size,Sort.by("id")));
+    }
     public EtatBCMBalanceGenerale findById(final Long id) {
         return etatBCMBalanceGeneraleDao.findById(id).orElse(null);
     }

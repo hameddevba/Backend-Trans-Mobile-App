@@ -3,6 +3,8 @@ package com.bank.project.service;
 import com.bank.project.dao.EtatBCMPrevisionEcheanceDao;
 import com.bank.project.model.EtatBCMPrevisionEcheance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,9 @@ public class EtatBCMPrevisionEcheanceService {
     public List<EtatBCMPrevisionEcheance> findAll() {
         return etatBCMPrevisionEcheanceDao.findAll(Sort.by("id"));
     }
-
+    public Page<EtatBCMPrevisionEcheance> findEchantillon(int page, int size) {
+        return etatBCMPrevisionEcheanceDao.findAll(PageRequest.of(page, size,Sort.by("id")));
+    }
     public EtatBCMPrevisionEcheance findById(final Long id) {
         return etatBCMPrevisionEcheanceDao.findById(id).orElse(null);
     }

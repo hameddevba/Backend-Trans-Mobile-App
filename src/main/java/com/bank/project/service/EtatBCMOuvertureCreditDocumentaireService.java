@@ -3,6 +3,8 @@ package com.bank.project.service;
 import com.bank.project.dao.EtatBCMOuvertureCreditDocumentaireDao;
 import com.bank.project.model.EtatBCMOuvertureCreditDocumentaire;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,9 @@ public class EtatBCMOuvertureCreditDocumentaireService {
     public List<EtatBCMOuvertureCreditDocumentaire> findAll() {
         return etatBCMOuvertureCreditDocumentaireDao.findAll(Sort.by("id"));
     }
-
+    public Page<EtatBCMOuvertureCreditDocumentaire> findEchantillon(int page, int size) {
+        return etatBCMOuvertureCreditDocumentaireDao.findAll(PageRequest.of(page, size,Sort.by("id")));
+    }
     public EtatBCMOuvertureCreditDocumentaire findById(final Long id) {
         return etatBCMOuvertureCreditDocumentaireDao.findById(id).orElse(null);
     }
