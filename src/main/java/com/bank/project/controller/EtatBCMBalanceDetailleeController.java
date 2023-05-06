@@ -1,11 +1,14 @@
 package com.bank.project.controller;
 
 import com.bank.project.dto.BalanceDetailleeDto;
+import com.bank.project.dto.PagebaleDataDto;
 import com.bank.project.mapper.BalanceDetailleeMapper;
 import com.bank.project.mapper.BalanceDetailleePublishMapper;
 import com.bank.project.model.EtatBCMBalanceDetaillee;
 import com.bank.project.service.EtatBCMBalanceDetailleeService;
 import com.bank.project.service.PublishService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,9 +36,12 @@ public class EtatBCMBalanceDetailleeController {
 
 
     @GetMapping
-    public ResponseEntity<List<BalanceDetailleeDto>> getAllEtatBCMBalanceDetaillees() {
-        List<EtatBCMBalanceDetaillee> etatBCMBalanceDetaillees = etatBCMBalanceDetailleeService.findEchantillon();
-        return ResponseEntity.ok(mapper.toDto(etatBCMBalanceDetaillees));
+    public ResponseEntity<PagebaleDataDto<BalanceDetailleeDto>> getAllEtatBCMBalanceDetaillees(@Param("page") int page, @Param("size") int size) {
+        Page<EtatBCMBalanceDetaillee> etatBCMBalanceDetaillees = etatBCMBalanceDetailleeService.findEchantillon(page,size);
+        PagebaleDataDto<BalanceDetailleeDto> pages = new PagebaleDataDto<>();
+        pages.setTotal(etatBCMBalanceDetaillees.getTotalPages());
+        pages.setData(mapper.toDto(etatBCMBalanceDetaillees.getContent()));
+        return ResponseEntity.ok(pages);
     }
 
     @GetMapping("/{id}")

@@ -3,6 +3,8 @@ package com.bank.project.service;
 import com.bank.project.dao.EtatBCMFluxSortantsDao;
 import com.bank.project.model.EtatBCMFluxSortants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class EtatBCMFluxSortantsService {
         return etatBCMFluxSortantsDao.findAll(Sort.by("id"));
     }
 
+    public Page<EtatBCMFluxSortants> findEchantillon(int page, int size) {
+        return etatBCMFluxSortantsDao.findAll(PageRequest.of(page, size,Sort.by("id")));
+    }
     public EtatBCMFluxSortants findById(final Long id) {
         return etatBCMFluxSortantsDao.findById(id).orElse(null);
     }
