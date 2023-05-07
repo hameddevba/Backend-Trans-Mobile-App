@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/etatBCMBalanceDetaillees", produces = MediaType.APPLICATION_JSON_VALUE)
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+@PreAuthorize("hasRole('ADMIN') || hasRole('COMPTABLE')")
 public class EtatBCMBalanceDetailleeController {
     private final EtatBCMBalanceDetailleeService etatBCMBalanceDetailleeService;
 
@@ -75,6 +75,7 @@ public class EtatBCMBalanceDetailleeController {
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN') || hasRole('MODIFICATION')")
     public ResponseEntity<Boolean> update(@RequestBody BalanceDetailleeDto etatBCMBalanceDetaillee) {
         return ResponseEntity.ok(etatBCMBalanceDetailleeService.update(this.mapper.toModel(etatBCMBalanceDetaillee)));
     }
