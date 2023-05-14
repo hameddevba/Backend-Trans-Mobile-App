@@ -20,6 +20,16 @@ public class ReleveDesComptesCorrespondantsPublishDto {
     private BigDecimal totalMvtsDebiteursJournee;
     private BigDecimal totalMvtsCrediteurs;
     private BigDecimal soldeFinJournee;
+    private Date dateFinJournee;
+    public Date getDateFinJournee() {
+        return dateFinJournee;
+    }
+
+    public void setDateFinJournee(Date dateFinJournee) {
+        this.dateFinJournee = dateFinJournee;
+    }
+
+
     public String getBanque() {
         return banque;
     }

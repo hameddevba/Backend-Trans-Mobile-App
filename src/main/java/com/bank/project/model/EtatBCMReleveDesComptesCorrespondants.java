@@ -36,6 +36,17 @@ public class EtatBCMReleveDesComptesCorrespondants {
     private BigDecimal totalMvtsCrediteurs;
     @Column
     private BigDecimal soldeFinJournee;
+    @Column
+    private Date dateFinJournee;
+    public Date getDateFinJournee() {
+        return dateFinJournee;
+    }
+
+    public void setDateFinJournee(Date dateFinJournee) {
+        this.dateFinJournee = dateFinJournee;
+    }
+
+
 
     public Long getId() {
         return id;

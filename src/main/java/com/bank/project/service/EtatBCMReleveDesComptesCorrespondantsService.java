@@ -31,15 +31,16 @@ public class EtatBCMReleveDesComptesCorrespondantsService {
         Optional<EtatBCMReleveDesComptesCorrespondants> etatBCMReleveDesComptesCorrespondantsOp = etatBCMReleveDesComptesCorrespondantsDao.findById(etatBCMReleveDesComptesCorrespondant.getId());
         if(etatBCMReleveDesComptesCorrespondantsOp.isPresent()){
             EtatBCMReleveDesComptesCorrespondants etatBCMReleveDesComptesCorrespondantsSaved = etatBCMReleveDesComptesCorrespondantsOp.get();
-            etatBCMReleveDesComptesCorrespondantsSaved.setBanque(etatBCMReleveDesComptesCorrespondantsSaved.getBanque());
-            etatBCMReleveDesComptesCorrespondantsSaved.setNomCorrespondant(etatBCMReleveDesComptesCorrespondantsSaved.getNomCorrespondant());
-            etatBCMReleveDesComptesCorrespondantsSaved.setNumCompte(etatBCMReleveDesComptesCorrespondantsSaved.getNumCompte());
-            etatBCMReleveDesComptesCorrespondantsSaved.setDevise(etatBCMReleveDesComptesCorrespondantsSaved.getDevise());
-            etatBCMReleveDesComptesCorrespondantsSaved.setDateApCloture(etatBCMReleveDesComptesCorrespondantsSaved.getDateApCloture());
-            etatBCMReleveDesComptesCorrespondantsSaved.setSoldeDebutJournee(etatBCMReleveDesComptesCorrespondantsSaved.getSoldeFinJournee());
-            etatBCMReleveDesComptesCorrespondantsSaved.setTotalMvtsDebiteursJournee(etatBCMReleveDesComptesCorrespondantsSaved.getTotalMvtsDebiteursJournee());
-            etatBCMReleveDesComptesCorrespondantsSaved.setTotalMvtsCrediteurs(etatBCMReleveDesComptesCorrespondantsSaved.getTotalMvtsCrediteurs());
-            etatBCMReleveDesComptesCorrespondantsSaved.setSoldeFinJournee(etatBCMReleveDesComptesCorrespondantsSaved.getSoldeFinJournee());
+            etatBCMReleveDesComptesCorrespondantsSaved.setBanque(etatBCMReleveDesComptesCorrespondant.getBanque());
+            etatBCMReleveDesComptesCorrespondantsSaved.setNomCorrespondant(etatBCMReleveDesComptesCorrespondant.getNomCorrespondant());
+            etatBCMReleveDesComptesCorrespondantsSaved.setNumCompte(etatBCMReleveDesComptesCorrespondant.getNumCompte());
+            etatBCMReleveDesComptesCorrespondantsSaved.setDevise(etatBCMReleveDesComptesCorrespondant.getDevise());
+            etatBCMReleveDesComptesCorrespondantsSaved.setDateApCloture(etatBCMReleveDesComptesCorrespondant.getDateApCloture());
+            etatBCMReleveDesComptesCorrespondantsSaved.setSoldeDebutJournee(etatBCMReleveDesComptesCorrespondant.getSoldeFinJournee());
+            etatBCMReleveDesComptesCorrespondantsSaved.setTotalMvtsDebiteursJournee(etatBCMReleveDesComptesCorrespondant.getTotalMvtsDebiteursJournee());
+            etatBCMReleveDesComptesCorrespondantsSaved.setTotalMvtsCrediteurs(etatBCMReleveDesComptesCorrespondant.getTotalMvtsCrediteurs());
+            etatBCMReleveDesComptesCorrespondantsSaved.setSoldeFinJournee(etatBCMReleveDesComptesCorrespondant.getSoldeFinJournee());
+            etatBCMReleveDesComptesCorrespondantsSaved.setDateFinJournee(etatBCMReleveDesComptesCorrespondant.getDateFinJournee());
             etatBCMReleveDesComptesCorrespondantsDao.save(etatBCMReleveDesComptesCorrespondantsSaved);
             return true;
         }
