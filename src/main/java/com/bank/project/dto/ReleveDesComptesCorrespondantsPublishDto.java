@@ -20,6 +20,7 @@ public class ReleveDesComptesCorrespondantsPublishDto {
     private BigDecimal totalMvtsDebiteursJournee;
     private BigDecimal totalMvtsCrediteurs;
     private BigDecimal soldeFinJournee;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dateFinJournee;
     public Date getDateFinJournee() {
         return dateFinJournee;

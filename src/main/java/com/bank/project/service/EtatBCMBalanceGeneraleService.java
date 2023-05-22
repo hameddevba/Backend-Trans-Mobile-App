@@ -35,6 +35,7 @@ public class EtatBCMBalanceGeneraleService {
         Optional<EtatBCMBalanceGenerale> etatBCMBalanceGeneraleSavedOp = etatBCMBalanceGeneraleDao.findById(etatBCMBalanceGenerale.getId());
         if(etatBCMBalanceGeneraleSavedOp.isPresent()){
             EtatBCMBalanceGenerale etatBCMBalanceGeneraleSaved = etatBCMBalanceGeneraleSavedOp.get();
+            etatBCMBalanceGeneraleSaved.setCompte(etatBCMBalanceGenerale.getCompte());
             etatBCMBalanceGeneraleSaved.setSoldeCrediteur(etatBCMBalanceGenerale.getSoldeCrediteur());
             etatBCMBalanceGeneraleSaved.setSoldeDebiteur(etatBCMBalanceGenerale.getSoldeDebiteur());
             etatBCMBalanceGeneraleSaved.setResident(etatBCMBalanceGenerale.getResident());

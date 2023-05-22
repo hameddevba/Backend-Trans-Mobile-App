@@ -2,11 +2,13 @@ package com.bank.project.controller;
 
 import com.bank.project.dao.RoleDao;
 import com.bank.project.dao.UserDao;
+import com.bank.project.dto.UserDetailDto;
 import com.bank.project.dto.request.LoginRequest;
 import com.bank.project.dto.request.SignupRequest;
 import com.bank.project.dto.response.JwtResponse;
 import com.bank.project.dto.response.MessageResponse;
 import com.bank.project.jwt.JwtUtils;
+import com.bank.project.mapper.UserMapper;
 import com.bank.project.model.Role;
 import com.bank.project.model.User;
 import com.bank.project.model.enums.RoleEnum;
@@ -19,13 +21,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -47,7 +47,18 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
+    private final UserMapper mapper;
 
+    public AuthController(UserMapper mapper) {
+        this.mapper = mapper;
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<UserDetailDto>> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return ResponseEntity.ok(mapper.toDto(users));
+    }
     @PostMapping("/signin")
     public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -104,6 +115,41 @@ public class AuthController {
 
         user.setRoles(roles);
         userRepository.save(user);
+
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    @PutMapping("/signput")
+    public ResponseEntity<MessageResponse> ModifUser(@Valid @RequestBody SignupRequest signUpRequest) {
+        if (!userRepository.existsByUsername(signUpRequest.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is not exist!"));
+        }
+        // Create new user's account
+        Optional<User> user = userRepository.findByUsername(signUpRequest.getUsername());
+        User userSaved = user.get();
+        //SignupRequest user = new SignupRequest();
+
+        Set<String> strRoles = signUpRequest.getRole();
+        Set<Role> roles = new HashSet<>();
+
+        if (strRoles == null) {
+            Role userRole = roleRepository.findByName(RoleEnum.ROLE_ADMIN)
+                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            roles.add(userRole);
+        } else {
+            strRoles.forEach(role -> {
+                Role adminRole = roleRepository.findByName(RoleEnum.valueOf(role.toUpperCase()))
+                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                roles.add(adminRole);
+            });
+        }
+
+        userSaved.setRoles(roles);
+        userSaved.setEmail(signUpRequest.getEmail());
+        userSaved.setPassword(encoder.encode(signUpRequest.getPassword()));
+        userRepository.save(userSaved);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

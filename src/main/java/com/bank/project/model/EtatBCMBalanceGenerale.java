@@ -19,7 +19,6 @@ public class EtatBCMBalanceGenerale {
     @Column
     private Date dateClotureBalance;
 
-    @Column(length = 13 ,nullable = false, updatable = false)
     private String compte;
 
     @Column
