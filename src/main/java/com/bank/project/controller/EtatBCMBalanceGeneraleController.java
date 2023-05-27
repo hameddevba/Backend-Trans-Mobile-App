@@ -9,11 +9,17 @@ import com.bank.project.service.EtatBCMBalanceGeneraleService;
 import com.bank.project.service.PublishService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -70,7 +76,15 @@ public class EtatBCMBalanceGeneraleController {
         boolean published = publishService.publishEtatGeneraleAnnuel(publishMapper.toDto(etatBCMBalanceGenerales));
         return ResponseEntity.ok(published);
     }
-
+    @GetMapping("/export")
+    public ResponseEntity<byte[]> export(String param) throws IOException {
+        String filename = new SimpleDateFormat("'balanceGenerale_'yyyyMMddHHmm'.csv'").format(new Date());
+        StringWriter sw = service.exportData();
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE); // (3) Content-Type: application/octet-stream
+        httpHeaders.set(HttpHeaders.CONTENT_DISPOSITION, ContentDisposition.attachment().filename(filename).build().toString()); // (4) Content-Disposition: attachment; filename="demo-file.txt"
+        return ResponseEntity.ok().headers(httpHeaders).body(sw.toString().getBytes());
+    }
     @PutMapping
     @PreAuthorize("hasRole('ADMIN') || hasRole('MODIFICATION')")
     public ResponseEntity<Boolean> update(@RequestBody BalanceGeneraleDto etatBCMBalanceGenerale) {

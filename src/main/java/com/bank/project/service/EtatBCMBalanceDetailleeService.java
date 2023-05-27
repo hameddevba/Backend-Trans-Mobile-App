@@ -2,12 +2,16 @@ package com.bank.project.service;
 
 import com.bank.project.dao.EtatBCMBalanceDetailleeDao;
 import com.bank.project.model.EtatBCMBalanceDetaillee;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,5 +55,32 @@ public class EtatBCMBalanceDetailleeService {
             return true;
         }
         return false;
+    }
+    public StringWriter exportData() throws IOException {
+        List<EtatBCMBalanceDetaillee> etatBCMBalanceDetaillees = etatBCMBalanceDetailleeDao.findAll();
+        String[] headers = new String[]{
+                "Banque", "compte", "dateClotureBalance", "intituleCompteComptable"
+                , "compteBancaireClient", "intituleCompteBancaire", "resident"
+                , "estClientApparente", "devise", "activiteClient", "secteurActiviteClient"
+                , "soldeDebiteur", "soldeCrediteur"
+        };
+        CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
+                .setHeader(headers)
+                .setDelimiter(";")
+                .build();
+        StringWriter sw = new StringWriter();
+        try (final CSVPrinter printer = new CSVPrinter(sw, csvFormat)) {
+            etatBCMBalanceDetaillees.forEach(report -> {
+                try {
+                    printer.printRecord(report.getBanque(), report.getCompte(),report.getDateClotureBalance(),report.getIntituleCompteComptable()
+                            ,report.getCompteBancaireClient(),report.getIntituleCompteBancaire(),report.getResident()
+                            ,report.getEstClientApparente(),report.getDevise(),report.getActiviteClient(),report.getSecteurActiviteClient()
+                            ,report.getSoldeDebiteur(),report.getSoldeCrediteur());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+        return sw;
     }
 }
