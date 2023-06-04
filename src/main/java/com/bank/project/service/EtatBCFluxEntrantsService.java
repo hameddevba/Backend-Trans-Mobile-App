@@ -61,7 +61,7 @@ public class EtatBCFluxEntrantsService {
                 "Banque", "reference de transaction", "date de transaction",
                 "type swfit", "mode de reglement", "devise", "montant de transaction",
                 "taux de change", "nom de donneur d'ordre",
-                "nifNni", "source devise", "beneficiaire", "produit",
+                "nifNni", "beneficiaire", "produit",
                 "Nature Economique", "pays",
         };
         CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
@@ -74,7 +74,7 @@ public class EtatBCFluxEntrantsService {
                 try {
                     printer.printRecord(report.getBanque(), report.getReferenceTransaction(), report.getDateTransaction(), report.getTypeSwfit(),
                             report.getModeReglement(), report.getDevise(), report.getMontantTransaction(), report.getTauxDeChange(),report.getNomDonneurOrdre(), report.getNifNni(),
-                            report.getDevise(), report.getBeneficiaire(), report.getProduit(), report.getNatureEconomique(), report.getPays());
+                            report.getBeneficiaire(), report.getProduit(), report.getNatureEconomique(), report.getPays());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
