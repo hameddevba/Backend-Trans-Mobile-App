@@ -2,12 +2,15 @@ package com.bank.project.controller;
 
 import com.bank.project.dao.RoleDao;
 import com.bank.project.dao.UserDao;
+import com.bank.project.dto.RoleDto;
 import com.bank.project.dto.UserDetailDto;
 import com.bank.project.dto.request.LoginRequest;
+import com.bank.project.dto.request.SigndeleteRequest;
 import com.bank.project.dto.request.SignupRequest;
 import com.bank.project.dto.response.JwtResponse;
 import com.bank.project.dto.response.MessageResponse;
 import com.bank.project.jwt.JwtUtils;
+import com.bank.project.mapper.RoleMapper;
 import com.bank.project.mapper.UserMapper;
 import com.bank.project.model.Role;
 import com.bank.project.model.User;
@@ -38,7 +41,6 @@ public class AuthController {
 
     @Autowired
     UserDao userRepository;
-
     @Autowired
     RoleDao roleRepository;
 
@@ -49,15 +51,30 @@ public class AuthController {
     JwtUtils jwtUtils;
     private final UserMapper mapper;
 
-    public AuthController(UserMapper mapper) {
+    private final RoleMapper roleMapper;
+
+    public AuthController(AuthenticationManager authenticationManager, UserDao userRepository, RoleDao roleRepository, PasswordEncoder encoder, JwtUtils jwtUtils, UserMapper mapper, RoleMapper roleMapper) {
+        this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.encoder = encoder;
+        this.jwtUtils = jwtUtils;
         this.mapper = mapper;
+        this.roleMapper = roleMapper;
     }
 
-
-    @GetMapping
+    @GetMapping("/users")
     public ResponseEntity<List<UserDetailDto>> getAllUsers() {
         List<User> users = userRepository.findAll();
+        users.forEach(user -> {
+            user.setPassword("");
+        });
         return ResponseEntity.ok(mapper.toDto(users));
+    }
+    @GetMapping("/roles")
+    public ResponseEntity<List<RoleDto>> getAllRoles() {
+        List<Role> roles = roleRepository.findAll();
+        return ResponseEntity.ok(roleMapper.toDto(roles));
     }
     @PostMapping("/signin")
     public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -120,36 +137,64 @@ public class AuthController {
     }
 
     @PutMapping("/signput")
-    public ResponseEntity<MessageResponse> ModifUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    public ResponseEntity<MessageResponse> ModifUser(@Valid @RequestBody User signUpRequest) {
+        User userSaved;
         if (!userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is not exist!"));
-        }
+            userSaved=new User();
+        }else{
         // Create new user's account
         Optional<User> user = userRepository.findByUsername(signUpRequest.getUsername());
-        User userSaved = user.get();
+         userSaved = user.get();
+        }
         //SignupRequest user = new SignupRequest();
 
-        Set<String> strRoles = signUpRequest.getRole();
+        Set<Role> strRoles = signUpRequest.getRoles();
         Set<Role> roles = new HashSet<>();
-
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(RoleEnum.ROLE_ADMIN)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
-                Role adminRole = roleRepository.findByName(RoleEnum.valueOf(role.toUpperCase()))
+                Role adminRole = roleRepository.findByName(RoleEnum.valueOf(role.getName().toString().toUpperCase()))
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                 roles.add(adminRole);
             });
         }
 
+        userSaved.setUsername(signUpRequest.getUsername());
         userSaved.setRoles(roles);
         userSaved.setEmail(signUpRequest.getEmail());
-        userSaved.setPassword(encoder.encode(signUpRequest.getPassword()));
+
+        if (signUpRequest.getPassword().equals("")) {
+            userSaved.setPassword(userSaved.getPassword());
+        } else {
+            userSaved.setPassword(encoder.encode(signUpRequest.getPassword()));
+        }
+        //userSaved.setPassword(encoder.encode(signUpRequest.getPassword()));
         userRepository.save(userSaved);
+
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    @PutMapping("/signdel")
+    public ResponseEntity<MessageResponse> deleteUser(@Valid @RequestBody SigndeleteRequest signUpRequest) {
+        if (!userRepository.existsByUsername(signUpRequest.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username N'est pas correcten!"));
+        }
+
+        if (!userRepository.existsByEmail(signUpRequest.getEmail())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Email N'est pas correcte!"));
+        }
+
+        Optional<User> user = userRepository.findByUsername(signUpRequest.getUsername());
+        User userSaved = user.get();
+
+        userRepository.delete(userSaved);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

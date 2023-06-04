@@ -29,7 +29,7 @@ public class User {
     @Email
     private String email;
 
-    @NotBlank
+    //@NotBlank
     @Size(max = 120)
     private String password;
 
@@ -41,7 +41,13 @@ public class User {
 
     public User() {
     }
-
+    public User(Long id, String username, String email, String password, Set<Role> roles) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
