@@ -73,7 +73,7 @@ public class EtatBCFluxEntrantsService {
             etatBCMFluxEntrants.forEach(report -> {
                 try {
                     printer.printRecord(report.getBanque(), report.getReferenceTransaction(), report.getDateTransaction(), report.getTypeSwfit(),
-                            report.getModeReglement(), report.getDevise(), report.getMontantTransaction(), report.getTauxDeChange(), report.getNifNni(),
+                            report.getModeReglement(), report.getDevise(), report.getMontantTransaction(), report.getTauxDeChange(),report.getNomDonneurOrdre(), report.getNifNni(),
                             report.getDevise(), report.getBeneficiaire(), report.getProduit(), report.getNatureEconomique(), report.getPays());
                 } catch (IOException e) {
                     e.printStackTrace();
