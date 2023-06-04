@@ -68,7 +68,7 @@ public class EtatBCMBalanceGeneraleService {
             etatBCMBalanceGenerales.forEach(report -> {
                 try {
                     printer.printRecord(report.getCompte(), report.getBanque(), report.getDateClotureBalance(), report.getIntituleCompte()
-                            , report.getDevise(), report.getResident(), report.getResident(), report.getSoldeDebiteur(), report.getSoldeCrediteur());
+                            , report.getDevise(), report.getResident(), report.getSoldeDebiteur(), report.getSoldeCrediteur());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
