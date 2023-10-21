@@ -25,7 +25,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/etatBCMBalanceGenerales", produces = MediaType.APPLICATION_JSON_VALUE)
-@PreAuthorize("hasRole('ADMIN') || hasRole('COMPTABLE')")
+@PreAuthorize("hasRole('ADMIN') || hasRole('ROLE_BALANCEGENERALE')")
 public class EtatBCMBalanceGeneraleController {
     private final EtatBCMBalanceGeneraleService service;
     private final PublishService publishService;

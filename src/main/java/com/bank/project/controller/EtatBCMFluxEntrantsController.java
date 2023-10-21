@@ -25,7 +25,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/etatBCM_Flux_Entrants", produces = MediaType.APPLICATION_JSON_VALUE)
-@PreAuthorize("hasRole('ADMIN') || hasRole('ETRANGER')")
+@PreAuthorize("hasRole('ADMIN') || hasRole('ROLE_FLUXENTRANT')")
 public class EtatBCMFluxEntrantsController {
     private final EtatBCFluxEntrantsService service;
 

@@ -25,7 +25,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/etatBCM_ReleveDesComptesCorrespondants", produces = MediaType.APPLICATION_JSON_VALUE)
-@PreAuthorize("hasRole('ADMIN') || hasRole('COMPTABLE')")
+@PreAuthorize("hasRole('ADMIN') || hasRole('ROLE_RELEVECPTCOR')")
 public class EtatBCMReleveDesComptesCorrespondantsController {
     private final EtatBCMReleveDesComptesCorrespondantsService service;
 

@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class PublishService {
@@ -104,17 +106,61 @@ public class PublishService {
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
-        HttpEntity<List<BalanceDetailleePublishDto>> request = new HttpEntity<>(etatBCMBalanceDetaillees, headers);
-        ResponseEntity<String> response = restTemplate.exchange(url + etatBCMBalanceDetailleeMensuelApi, HttpMethod.POST, request, String.class);
-        return response.getStatusCode().is2xxSuccessful();
+
+        int partitionSize = 5000;
+        List<List<BalanceDetailleePublishDto>> partitions = new ArrayList<>();
+
+        for (int i=0; i<etatBCMBalanceDetaillees.size(); i += partitionSize) {
+            partitions.add(etatBCMBalanceDetaillees.subList(i, Math.min(i + partitionSize, etatBCMBalanceDetaillees.size())));
+        }
+
+        boolean result=false;
+        HttpEntity<List<BalanceDetailleePublishDto>> request=null;
+        ResponseEntity<String> response=null;
+        for (List<BalanceDetailleePublishDto> list : partitions) {
+            //Do your stuff on each sub list
+            try {
+         request = new HttpEntity<>(list, headers);
+         response = restTemplate.exchange(url + etatBCMBalanceDetailleeMensuelApi, HttpMethod.POST, request, String.class);
+            result=response.getStatusCode().is2xxSuccessful();
+            }catch (Exception e){
+                e.toString();
+            }
+         if(!result){
+           break;
+       }
+        }
+        return result;
     }
     public boolean publishEtatBalanceDetailleeAnnuel(List<BalanceDetailleePublishDto> etatBCMBalanceDetaillees){
         String token = getToken(restTemplate);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, token);
-        HttpEntity<List<BalanceDetailleePublishDto>> request = new HttpEntity<>(etatBCMBalanceDetaillees, headers);
-        ResponseEntity<String> response = restTemplate.exchange(url + etatBCMBalanceDetailleeAnnuelApi, HttpMethod.POST, request, String.class);
-        return response.getStatusCode().is2xxSuccessful();
+
+        int partitionSize = 5000;
+        List<List<BalanceDetailleePublishDto>> partitions = new ArrayList<>();
+
+        for (int i=0; i<etatBCMBalanceDetaillees.size(); i += partitionSize) {
+            partitions.add(etatBCMBalanceDetaillees.subList(i, Math.min(i + partitionSize, etatBCMBalanceDetaillees.size())));
+        }
+
+        boolean result=false;
+
+        HttpEntity<List<BalanceDetailleePublishDto>> request=null;
+        ResponseEntity<String> response=null;
+        for (List<BalanceDetailleePublishDto> list : partitions) {
+           try {
+               request = new HttpEntity<>(list, headers);
+               response = restTemplate.exchange(url + etatBCMBalanceDetailleeAnnuelApi, HttpMethod.POST, request, String.class);
+               result = response.getStatusCode().is2xxSuccessful();
+           }catch (Exception e){
+               e.toString();
+           }
+            if(!result){
+                break;
+            }
+        }
+        return result;
     }
     public boolean publishFluxSortant(List<FluxSortantsPublishDto> fluxSortantsPublishDto){
 

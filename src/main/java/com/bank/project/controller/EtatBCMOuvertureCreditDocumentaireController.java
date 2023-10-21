@@ -25,7 +25,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/etatBCM_OuvertureCreditDocumentaire", produces = MediaType.APPLICATION_JSON_VALUE)
-@PreAuthorize("hasRole('ADMIN') || hasRole('ETRANGER') || hasRole('AUTRE')")
+@PreAuthorize("hasRole('ADMIN') || hasRole('ROLE_OUVERTURECREDOC')")
 public class EtatBCMOuvertureCreditDocumentaireController {
     private final EtatBCMOuvertureCreditDocumentaireService service;
 
