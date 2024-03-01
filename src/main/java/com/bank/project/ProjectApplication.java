@@ -14,19 +14,7 @@ public class ProjectApplication implements CommandLineRunner {
         SpringApplication.run(ProjectApplication.class, args);
     }
 
-    @Autowired
-    EtatBCMBalanceGeneraleDao etatBCMBalanceGeneraleDao;
-    @Autowired
-    RoleDao roleDao;
 
-    @Autowired
-    EtatBCMPrevisionEcheanceDao etatBCMPrevisionEcheanceDao;
-
-
-    @Autowired
-    EtatBCMReleveDesComptesCorrespondantsDao etatBCMReleveDesComptesCorrespondantsDao;
-    @Autowired
-    EtatBCMFluxSortantsDao etatBCMFluxSortantsDao;
 
     @Override
     public void run(String... args) throws Exception {
