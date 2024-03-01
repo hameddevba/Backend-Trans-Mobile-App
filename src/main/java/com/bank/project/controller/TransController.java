@@ -5,9 +5,6 @@ import com.bank.project.mapper.TransMapper;
 import com.bank.project.model.Trans;
 import com.bank.project.service.TransService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,12 +31,15 @@ public class TransController {
         Trans trans = transService.findById(id);
         return mapper.toDto(trans);
     }
+//    @PostMapping("/changetrans")
+//    public TransDto save(@RequestBody TransDto transDto) {
+//        Trans trans = transService.save(this.mapper.toModel(transDto));
+//        return mapper.toDto(trans);
+//    }
+
     @PostMapping("/changetrans")
     public TransDto save(@RequestBody TransDto transDto) {
-        Trans trans = transService.save(this.mapper.toModel(transDto));
-        return mapper.toDto(trans);
+        return transService.addTrans(transDto);
     }
-
-
     
 }

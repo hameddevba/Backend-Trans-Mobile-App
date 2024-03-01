@@ -5,9 +5,10 @@ import com.bank.project.dao.EnvoyeurDao;
 import com.bank.project.model.Benef;
 import com.bank.project.model.Envoyeur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class EnvoyeurService {
     @Autowired
     private EnvoyeurDao envoyeurDao;

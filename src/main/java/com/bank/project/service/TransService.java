@@ -1,6 +1,11 @@
 package com.bank.project.service;
 
 import com.bank.project.dao.TransDao;
+import com.bank.project.dto.TransDto;
+import com.bank.project.mapper.BenefMapper;
+import com.bank.project.mapper.EnvoyeurMapper;
+import com.bank.project.mapper.TransMapper;
+import com.bank.project.model.Benef;
 import com.bank.project.model.Envoyeur;
 import com.bank.project.model.Trans;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +19,23 @@ import java.util.List;
 public class TransService {
     @Autowired
     private TransDao transDao;
+    @Autowired
+    private BenefMapper benefMapper;
+    @Autowired
+    private EnvoyeurMapper envoyeurMapper;
 
-    private EnvoyeurService envoyeurService;
+    @Autowired
+    TransMapper transMapper;
 
+    private final BenefService benefService;
 
-    private BenefService benefService;
+    private final EnvoyeurService envoyeurService;
+
+    public TransService(BenefService benefService, EnvoyeurService envoyeurService) {
+        this.benefService = benefService;
+        this.envoyeurService = envoyeurService;
+    }
+
 
     public List<Trans> find() {
         return transDao.findAll();
@@ -30,6 +47,28 @@ public class TransService {
 
     public Trans save(Trans trans) {
         return transDao.save(trans);
+    }
+
+    public TransDto addTrans(TransDto transDto){
+
+        Trans trans = transMapper.toModel(transDto);
+
+        Benef benefDto =  benefMapper.toModel(transDto.getBenef());
+        if (benefDto != null){
+            Benef benef = benefService.save(benefDto);
+            trans.setBenef(benef);
+        }
+
+        Envoyeur envoyeurDto = envoyeurMapper.toModel(transDto.getEnvoyeur());
+        if(envoyeurDto != null){
+            Envoyeur envoyeur = envoyeurService.save(envoyeurDto);
+            trans.setEnvoyeur(envoyeur);
+        }
+
+
+        return transMapper.toDto(transDao.save(trans));
+
+//        return envoyeurMapper.toModel(transDto.getEnvoyeur()); // test les donnees envoyee via request;
     }
 
 }
