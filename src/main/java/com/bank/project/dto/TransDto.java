@@ -28,7 +28,7 @@ public class TransDto {
     private String tRDEVPAY;
     private String tRCODEPAY;
     private String tRCODETRANS;
-//    private byte[] tRAVIS;
+    private byte[] tRAVIS;
     private String tRDEMANEN;
     private String tRDEMANBEN;
     private String tRVALIDAN;
@@ -193,13 +193,13 @@ public class TransDto {
         this.tRCODETRANS=tRCODETRANS;
     }
 
-//    public byte[] getTRAVIS(){
-//        return tRAVIS;
-//    }
+    public byte[] getTRAVIS(){
+        return tRAVIS;
+    }
 
-//    public void setTRAVIS(byte[] tRAVIS){
-//        this.tRAVIS=tRAVIS;
-//    }
+    public void setTRAVIS(byte[] tRAVIS){
+        this.tRAVIS=tRAVIS;
+    }
 
     public String getTRDEMANEN(){
         return tRDEMANEN;

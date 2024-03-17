@@ -11,7 +11,10 @@ import com.bank.project.model.Trans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -49,7 +52,7 @@ public class TransService {
         return transDao.save(trans);
     }
 
-    public TransDto addTrans(TransDto transDto){
+    public TransDto addTrans(TransDto transDto, MultipartFile file){
 
         Trans trans = transMapper.toModel(transDto);
 
@@ -65,7 +68,13 @@ public class TransService {
             trans.setEnvoyeur(envoyeur);
         }
 
+        try{
+            trans.setTRAVIS(file.getBytes());
+        }catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
 
+        System.out.println(Arrays.toString(trans.getTRAVIS()));
         return transMapper.toDto(transDao.save(trans));
 
 //        return envoyeurMapper.toModel(transDto.getEnvoyeur()); // test les donnees envoyee via request;

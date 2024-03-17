@@ -4,8 +4,11 @@ import com.bank.project.dto.TransDto;
 import com.bank.project.mapper.TransMapper;
 import com.bank.project.model.Trans;
 import com.bank.project.service.TransService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,6 +22,8 @@ public class TransController {
     TransService transService;
     @Autowired
     TransMapper mapper;
+
+    ObjectMapper objectMapper = new ObjectMapper();
 
     @GetMapping
     public List<TransDto> findAll(){
@@ -38,8 +43,9 @@ public class TransController {
 //    }
 
     @PostMapping("/changetrans")
-    public TransDto save(@RequestBody TransDto transDto) {
-        return transService.addTrans(transDto);
+    public TransDto save(@RequestParam("data") String stransDto, @RequestParam("file") MultipartFile file) throws JsonProcessingException {
+        TransDto transDto = objectMapper.readValue(stransDto, TransDto.class);
+        return transService.addTrans(transDto,file);
     }
     
 }

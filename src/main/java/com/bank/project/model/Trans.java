@@ -37,7 +37,9 @@ import java.util.Date;
         private String tRDEVPAY;
         private String tRCODEPAY;
         private String tRCODETRANS;
-//        private byte[] tRAVIS;
+        @Lob
+        @Column(length = 10000)
+        private byte[] tRAVIS;
         private String tRDEMANEN;
         private String tRDEMANBEN;
         private String tRVALIDAN;
@@ -202,13 +204,13 @@ import java.util.Date;
             this.tRCODETRANS=tRCODETRANS;
         }
 
-//        public byte[] getTRAVIS(){
-//            return tRAVIS;
-//        }
-//
-//        public void setTRAVIS(byte[] tRAVIS){
-//            this.tRAVIS=tRAVIS;
-//        }
+        public byte[] getTRAVIS(){
+            return tRAVIS;
+        }
+
+        public void setTRAVIS(byte[] tRAVIS){
+            this.tRAVIS=tRAVIS;
+        }
 
         public String getTRDEMANEN(){
             return tRDEMANEN;
