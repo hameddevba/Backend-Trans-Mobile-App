@@ -16,12 +16,23 @@ public class Envoyeur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer eNCODE;
-    private Integer eNAGCODE;
+
+
+    private Integer enagcode;
     private String eNNOM;
     private String eNPRE;
     private String eNPI;
     private String eNTYPP;
-    private String eNTEL;
+
+    public String getEntel() {
+        return entel;
+    }
+
+    public void setEntel(String entel) {
+        this.entel = entel;
+    }
+
+    private String entel;
     private String eNADD;
     private Timestamp eNDATE;
     private Integer eNUSCODE;
@@ -35,12 +46,12 @@ public class Envoyeur {
         this.eNCODE=eNCODE;
     }
 
-    public Integer getENAGCODE(){
-        return eNAGCODE;
+    public Integer getEnagcode(){
+        return enagcode;
     }
 
-    public void setENAGCODE(Integer eNAGCODE){
-        this.eNAGCODE=eNAGCODE;
+    public void setEnagcode(Integer eNAGCODE){
+        this.enagcode=eNAGCODE;
     }
 
     public String getENNOM(){
@@ -75,13 +86,13 @@ public class Envoyeur {
         this.eNTYPP=eNTYPP;
     }
 
-    public String getENTEL(){
-        return eNTEL;
-    }
-
-    public void setENTEL(String eNTEL){
-        this.eNTEL=eNTEL;
-    }
+//    public String getENTEL(){
+//        return eNTEL;
+//    }
+//
+//    public void setENTEL(String eNTEL){
+//        this.eNTEL=eNTEL;
+//    }
 
     public String getENADD(){
         return eNADD;

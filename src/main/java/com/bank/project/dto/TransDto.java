@@ -33,7 +33,16 @@ public class TransDto {
     private String tRDEMANBEN;
     private String tRVALIDAN;
     private String tRREJET;
-    private LocalDateTime tRDATCR;
+
+    public String getTrdatcr() {
+        return trdatcr;
+    }
+
+    public void setTrdatcr(String trdatcr) {
+        this.trdatcr = trdatcr;
+    }
+
+    private String trdatcr;
     private Date tRDATE;
     private Integer trtyp;
 
@@ -233,13 +242,13 @@ public class TransDto {
         this.tRREJET=tRREJET;
     }
 
-    public LocalDateTime getTRDATCR(){
-        return tRDATCR;
-    }
-
-    public void setTRDATCR(LocalDateTime tRDATCR){
-        this.tRDATCR=tRDATCR;
-    }
+//    public String getTRDATCR(){
+//        return tRDATCR;
+//    }
+//
+//    public void setTRDATCR(String tRDATCR){
+//        this.tRDATCR=tRDATCR;
+//    }
 
     public Date getTRDATE(){
         return tRDATE;

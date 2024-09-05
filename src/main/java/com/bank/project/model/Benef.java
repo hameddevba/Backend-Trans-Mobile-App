@@ -20,7 +20,7 @@ public class Benef {
     private String bNPRE;
     private String bNPI;
     private String bNTYPP;
-    private String bNTEL;
+    private String bntel;
     private String bNADD;
     private Timestamp bNDATE;
     private Integer bNUSCODE;
@@ -75,11 +75,11 @@ public class Benef {
     }
 
     public String getBNTEL(){
-        return bNTEL;
+        return bntel;
     }
 
     public void setBNTEL(String bNTEL){
-        this.bNTEL=bNTEL;
+        this.bntel=bNTEL;
     }
 
     public String getBNADD(){

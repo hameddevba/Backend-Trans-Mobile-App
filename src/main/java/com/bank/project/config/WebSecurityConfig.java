@@ -55,6 +55,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/trans").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/trans/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/agences/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/trans/changetrans").permitAll()
                         .anyRequest().authenticated());
         http.authenticationProvider(authenticationProvider());

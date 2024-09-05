@@ -31,6 +31,15 @@ public class TransController {
           return mapper.toDto(transes);
     }
 
+    @GetMapping("filtre/{number}/{agence}")
+    public List<TransDto> findFiltreTrans(@PathVariable String number, @PathVariable int agence){
+       return transService.findFiltreTrans(number,agence);
+    }
+    @GetMapping("benef/{number}")
+    public List<TransDto> findTransByBenef(@PathVariable String number){
+        return transService.findTransByBenef(number);
+    }
+
     @GetMapping("/{id}")
     public TransDto findById(@PathVariable Long id){
         Trans trans = transService.findById(id);
@@ -42,10 +51,15 @@ public class TransController {
 //        return mapper.toDto(trans);
 //    }
 
+//    @PostMapping("/changetrans")
+//    public TransDto save(@RequestParam("data") String stransDto, @RequestParam("file") MultipartFile file) throws JsonProcessingException {
+//        TransDto transDto = objectMapper.readValue(stransDto, TransDto.class);
+//        return transService.addTrans(transDto,file);
+//    }
     @PostMapping("/changetrans")
-    public TransDto save(@RequestParam("data") String stransDto, @RequestParam("file") MultipartFile file) throws JsonProcessingException {
+    public TransDto save(@RequestParam("data") String stransDto) throws JsonProcessingException {
         TransDto transDto = objectMapper.readValue(stransDto, TransDto.class);
-        return transService.addTrans(transDto,file);
+        return transService.addTrans(transDto);
     }
     
 }

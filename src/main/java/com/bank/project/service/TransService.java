@@ -27,19 +27,30 @@ public class TransService {
     @Autowired
     private EnvoyeurMapper envoyeurMapper;
 
+
+
     @Autowired
-    TransMapper transMapper;
+    private final TransMapper transMapper;
 
     private final BenefService benefService;
 
     private final EnvoyeurService envoyeurService;
 
-    public TransService(BenefService benefService, EnvoyeurService envoyeurService) {
+    public TransService(BenefService benefService, EnvoyeurService envoyeurService,TransMapper transMapper) {
         this.benefService = benefService;
         this.envoyeurService = envoyeurService;
+        this.transMapper = transMapper;
     }
 
 
+
+    public List<TransDto> findFiltreTrans(String number, int agence){
+        return transMapper.toDto(transDao.findByEnvoyeur_EntelAndEnvoyeur_Enagcode(number,agence));
+    }
+
+    public List<TransDto> findTransByBenef(String number){
+        return transMapper.toDto(transDao.findByEnvoyeur_EntelOrderByTrcodeDesc(number));
+    }
     public List<Trans> find() {
         return transDao.findAll();
     }
@@ -52,7 +63,35 @@ public class TransService {
         return transDao.save(trans);
     }
 
-    public TransDto addTrans(TransDto transDto, MultipartFile file){
+//    public TransDto addTrans(TransDto transDto, MultipartFile file){
+//
+//        Trans trans = transMapper.toModel(transDto);
+//
+//        Benef benefDto =  benefMapper.toModel(transDto.getBenef());
+//        if (benefDto != null){
+//            Benef benef = benefService.save(benefDto);
+//            trans.setBenef(benef);
+//        }
+//
+//        Envoyeur envoyeurDto = envoyeurMapper.toModel(transDto.getEnvoyeur());
+//        if(envoyeurDto != null){
+//            Envoyeur envoyeur = envoyeurService.save(envoyeurDto);
+//            trans.setEnvoyeur(envoyeur);
+//        }
+//
+//        try{
+//            trans.setTRAVIS(file.getBytes());
+//        }catch (IOException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//
+////        System.out.println(Arrays.toString(trans.getTRAVIS()));
+//        return transMapper.toDto(transDao.save(trans));
+//
+////        return envoyeurMapper.toModel(transDto.getEnvoyeur()); // test les donnees envoyee via request;
+//    }
+
+    public TransDto addTrans(TransDto transDto){
 
         Trans trans = transMapper.toModel(transDto);
 
@@ -68,16 +107,11 @@ public class TransService {
             trans.setEnvoyeur(envoyeur);
         }
 
-        try{
-            trans.setTRAVIS(file.getBytes());
-        }catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-
-        System.out.println(Arrays.toString(trans.getTRAVIS()));
+//        System.out.println(Arrays.toString(trans.getTRAVIS()));
         return transMapper.toDto(transDao.save(trans));
 
 //        return envoyeurMapper.toModel(transDto.getEnvoyeur()); // test les donnees envoyee via request;
     }
+
 
 }
