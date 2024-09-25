@@ -39,7 +39,7 @@ public class Trans {
     private String tRCODEPAY;
     private String tRCODETRANS;
     @Lob
-    @Column(length = 10000)
+//    @Column(length = 4433112)
     private byte[] tRAVIS;
     private String tRDEMANEN;
     private String tRDEMANBEN;

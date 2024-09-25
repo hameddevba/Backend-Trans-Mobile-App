@@ -7,10 +7,16 @@ import com.bank.project.service.TransService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
+
+import static org.springframework.http.MediaType.IMAGE_JPEG;
+import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 
 @RestController
 @RequestMapping(value ="/api/trans")
@@ -35,9 +41,9 @@ public class TransController {
     public List<TransDto> findFiltreTrans(@PathVariable String number, @PathVariable int agence){
        return transService.findFiltreTrans(number,agence);
     }
-    @GetMapping("benef/{number}")
-    public List<TransDto> findTransByBenef(@PathVariable String number){
-        return transService.findTransByBenef(number);
+    @GetMapping("/env/{number}")
+    public List<TransDto> findTransAll(@PathVariable String number){
+        return transService.findTransByEnv(number);
     }
 
     @GetMapping("/{id}")
@@ -51,11 +57,22 @@ public class TransController {
 //        return mapper.toDto(trans);
 //    }
 
-//    @PostMapping("/changetrans")
-//    public TransDto save(@RequestParam("data") String stransDto, @RequestParam("file") MultipartFile file) throws JsonProcessingException {
-//        TransDto transDto = objectMapper.readValue(stransDto, TransDto.class);
-//        return transService.addTrans(transDto,file);
-//    }
+    @PatchMapping("/image-upload/{code}")
+    public ResponseEntity<String> save(@PathVariable Long code, @RequestParam("file") MultipartFile file) throws IOException {
+        transService.uploadFile(code, file);
+        return ResponseEntity.ok("fichier enregistrer");
+    }
+
+
+    @GetMapping("/image/{code}")
+    public ResponseEntity<?> getImage(@PathVariable Long code) throws IOException {
+        byte[] image = transService.findById(code).getTRAVIS();
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.valueOf(IMAGE_PNG_VALUE))
+                .contentType(MediaType.valueOf(String.valueOf(IMAGE_JPEG)))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + code + "\"")
+                .body(image);
+    }
     @PostMapping("/changetrans")
     public TransDto save(@RequestParam("data") String stransDto) throws JsonProcessingException {
         TransDto transDto = objectMapper.readValue(stransDto, TransDto.class);

@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -48,7 +49,7 @@ public class TransService {
         return transMapper.toDto(transDao.findByEnvoyeur_EntelAndEnvoyeur_Enagcode(number,agence));
     }
 
-    public List<TransDto> findTransByBenef(String number){
+    public List<TransDto> findTransByEnv(String number){
         return transMapper.toDto(transDao.findByEnvoyeur_EntelOrderByTrcodeDesc(number));
     }
     public List<Trans> find() {
@@ -63,33 +64,23 @@ public class TransService {
         return transDao.save(trans);
     }
 
-//    public TransDto addTrans(TransDto transDto, MultipartFile file){
-//
-//        Trans trans = transMapper.toModel(transDto);
-//
-//        Benef benefDto =  benefMapper.toModel(transDto.getBenef());
-//        if (benefDto != null){
-//            Benef benef = benefService.save(benefDto);
-//            trans.setBenef(benef);
-//        }
-//
-//        Envoyeur envoyeurDto = envoyeurMapper.toModel(transDto.getEnvoyeur());
-//        if(envoyeurDto != null){
-//            Envoyeur envoyeur = envoyeurService.save(envoyeurDto);
-//            trans.setEnvoyeur(envoyeur);
-//        }
-//
-//        try{
-//            trans.setTRAVIS(file.getBytes());
-//        }catch (IOException ex) {
-//            throw new RuntimeException(ex);
-//        }
-//
-////        System.out.println(Arrays.toString(trans.getTRAVIS()));
-//        return transMapper.toDto(transDao.save(trans));
-//
-////        return envoyeurMapper.toModel(transDto.getEnvoyeur()); // test les donnees envoyee via request;
-//    }
+    public void uploadFile(Long transCode, MultipartFile file){
+
+        Optional<Trans> trans = transDao.findById(transCode);
+
+
+        try{
+            if(trans.isPresent()){
+                trans.get().setTRAVIS(file.getBytes());
+                trans.get().setTRVALIDAN("3");
+            }
+        }catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+
+//        System.out.println(Arrays.toString(trans.getTRAVIS()));
+        transMapper.toDto(transDao.save(trans.get()));
+    }
 
     public TransDto addTrans(TransDto transDto){
 
