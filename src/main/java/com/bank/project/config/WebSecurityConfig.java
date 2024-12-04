@@ -57,6 +57,9 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.PATCH, "/api/trans/image-upload/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/trans/image/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/agences/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/tarif-wari").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/tau").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/ca-modif-tau/*").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/trans/add_trans").permitAll()
                         .anyRequest().authenticated());
         http.authenticationProvider(authenticationProvider());
